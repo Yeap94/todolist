@@ -1,0 +1,50 @@
+<h1>TEST</h1>
+<div>
+    <input type="text" placeholder = "New task name" ng-model = "vm.newTaskName">
+    <button ng-click = "vm.addNewTask()" ng-disabled = "!vm.newTaskName">Add Task</button>
+</div>
+<div>
+    <table>
+        <thead>
+            <th>№</th>
+            <th>Creation Date</th>
+            <th>Task Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat = "task in vm.todoList track by $index">
+                <td>{{$index+1}}</td>
+                <td>{{task.name}}</td>
+                <td>{{task.date.format("DD-MM-YYYY HH:mm")}}</td>
+                <td>
+                    <input type="checkbox" ng-model = "task.status">
+                </td>
+                <td>
+                    <button ng-click = "vm.changeTaskStatus(task)" ng-if = "!task.status">Done</button>
+                    <button ng-click = "vm.changeTaskStatus(task)" ng-if = "task.status">Undone</button>
+                    <button ng-click = "vm.deleteTask($index)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <table>
+        <thead>
+            <th>№</th>
+            <th>Action Date</th>
+            <th>Task Name</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat = "log in vm.logTask track by $index">
+                <td>{{$index+1}}</td>
+                <td>{{log.name}}</td>
+                <td>{{log.date.format("DD-MM-YYYY HH:mm")}}</td>
+                <td>{{log.action}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
