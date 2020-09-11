@@ -45,6 +45,7 @@ class TodoController {
     }
     // удаление задания из списка
     public deleteTask = (index: number) => {
+        // добавляет событие в массив logTask (история изменений)
         this.logTask.push({
             name: this.todoList[index].name,
             date: moment(),
