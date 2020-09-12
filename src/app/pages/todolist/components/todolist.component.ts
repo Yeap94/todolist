@@ -1,8 +1,8 @@
 import * as angular from 'angular';
 import * as _ from 'underscore';
 import * as moment from 'moment';
-import { ITodoItem } from '../../interface/todoitem.interface';
-import { ILogOfTask } from '../../interface/log.interface';
+import { ITodoItem } from './../../../models/todoitem.interface';
+import { ILogOfTask } from './../../../models/log.interface';
 
 class TodoController {
     private newTaskName: string;

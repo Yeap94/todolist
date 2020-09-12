@@ -1,5 +1,4 @@
 export const configLocation = ($locationProvider: angular.ILocationProvider) => {
-    'ngInject';
     $locationProvider.hashPrefix('');
 };
 

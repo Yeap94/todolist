@@ -2,14 +2,11 @@ const path = require('path');
 const ROOT = path.resolve( __dirname, 'src' );
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
     context: ROOT,
-
-    node: {
-        fs: 'empty'
-    },
 
     resolve: {
         extensions: ['.ts', '.js']
@@ -43,7 +40,7 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader'],
-                    publicPath: '../'
+                    publicPath: './../'
                 }),
             },
 
@@ -59,7 +56,7 @@ module.exports = {
             },
 
             {
-                test: /\.(png|gif)$/,
+                test: /\.(png|gify)$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
@@ -84,7 +81,7 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Todolist',
+            title: 'KTE Task',
             template: 'index.html',
             inject: true
         }),
@@ -97,7 +94,8 @@ module.exports = {
                 }
             }
         }),
-        new ExtractTextPlugin('css/style.css')
+        new ExtractTextPlugin('css/style.css'),
+        new FaviconsWebpackPlugin('app/themes/favicon.ico')
     ],
 
     entry: './index.ts'

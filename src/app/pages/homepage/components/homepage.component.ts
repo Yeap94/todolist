@@ -8,7 +8,6 @@ class HomePageController {
     }
 
     public goTodo = () => {
-        console.log('in goTodo');
         this.$state.go('todolist');
     }
 }
