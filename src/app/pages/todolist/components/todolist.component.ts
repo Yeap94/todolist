@@ -5,18 +5,25 @@ import { ITodoItem } from './../../../models/todoitem.interface';
 import { ILogOfTask } from './../../../models/log.interface';
 
 class TodoController {
+    private reverseSort: boolean = false;
+    private orderByFiled: string = 'position';
     private newTaskName: string;
-    private todoList: Array<ITodoItem> = [
-        {
-            name: 'Sample',
-            date: moment(),
-            status: true
-        }
-    ];
+    private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = [];
+    $onInit = () => {
+        this.todoList.push(
+            {
+                position: this.todoList.length + 1,
+                name: 'Sample',
+                date: moment(),
+                status: true
+            }
+        );
+    }
     // добавление нового задания
     public addNewTask = () => {
         this.todoList.push({
+            position: this.todoList.length + 1,
             name: this.newTaskName,
             date: moment(),
             status: false
@@ -52,6 +59,13 @@ class TodoController {
             action: 'Delete'
         });
         this.todoList.splice(index, 1);
+    }
+    // очистка лога
+    public clearLog = () => {
+        this.logTask.splice(0, this.logTask.length);
+    }
+    public info = () => {
+        console.log('Reverse is ', this.reverseSort, '\nOrderField is ', this.orderByFiled);
     }
 }
 
