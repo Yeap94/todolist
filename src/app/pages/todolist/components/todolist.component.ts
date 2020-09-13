@@ -5,11 +5,13 @@ import { ITodoItem } from './../../../models/todoitem.interface';
 import { ILogOfTask } from './../../../models/log.interface';
 
 class TodoController {
+
     private reverseSort: boolean = false;
     private orderByField: string = 'position';
     private newTaskName: string;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
+
     $onInit = () => {
         this.todoList.push(
             {
@@ -20,6 +22,7 @@ class TodoController {
             }
         );
     }
+
     /**
      * @description добавляет новое задание в список заданий
      */
@@ -39,6 +42,7 @@ class TodoController {
             this.newTaskName = null;
         }
     }
+
     /**
      * @description изменяет статус задания на done/undone в списке  по кнопке или чекбоксу
      * @param task - задание, элемент массива todoList, для которого изменяется статус done/undone
@@ -57,6 +61,7 @@ class TodoController {
             action: `Status changed on ${changedStatus}`
         });
     }
+
     /**
      * @description удаляет задание из списка
      * @param index - индекс задания, на котором была нажата кнопка Delete
@@ -69,6 +74,7 @@ class TodoController {
         });
         this.todoList.splice(index, 1);
     }
+
     /**
      * @description функция сортировки значений таблицы по убыванию/возрастанию
      * @param field поле, по которому происходит сортировка. В разметке при вызове функции sortTask передается название столбца, на котором нужна фильтрация
@@ -87,6 +93,7 @@ class TodoController {
             action: clear ? 'Cancel sort and filter' : `Sort by ${field}. Reverse: ${this.reverseSort}`
         });
     }
+
     /**
      * @description функция очистки лога текущих событий
      */
