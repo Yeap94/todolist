@@ -6,10 +6,10 @@ import { ILogOfTask } from './../../../models/log.interface';
 
 class TodoController {
     private reverseSort: boolean = false;
-    private orderByFiled: string = 'position';
+    private orderByField: string = 'position';
     private newTaskName: string;
     private todoList: Array<ITodoItem> = [];
-    private logTask: Array<ILogOfTask> = [];
+    private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
     $onInit = () => {
         this.todoList.push(
             {
@@ -20,22 +20,29 @@ class TodoController {
             }
         );
     }
-    // добавление нового задания
-    public addNewTask = () => {
-        this.todoList.push({
-            position: this.todoList.length + 1,
-            name: this.newTaskName,
-            date: moment(),
-            status: false
-        });
-        this.logTask.push({
-            name: this.newTaskName,
-            date: moment(),
-            action: 'Add'
-        });
-        this.newTaskName = null;
+    /**
+     * @description добавляет новое задание в список заданий
+     */
+    public addNewTask = (event?: any) => {
+        if ((event && event.key === 'Enter' || event === undefined) && this.newTaskName) {
+            this.todoList.push({
+                position: this.todoList.length + 1,
+                name: this.newTaskName,
+                date: moment(),
+                status: false
+            });
+            this.logTask.push({
+                name: this.newTaskName,
+                date: moment(),
+                action: 'Add'
+            });
+            this.newTaskName = null;
+        }
     }
-    // изменение статуса задания
+    /**
+     * @description изменяет статус задания на done/undone в списке  по кнопке или чекбоксу
+     * @param task - задание, элемент массива todoList, для которого изменяется статус done/undone
+     */
     public changeTaskStatus = (task: ITodoItem) => {
         task.status = !task.status;
         let changedStatus: string;
@@ -50,9 +57,11 @@ class TodoController {
             action: `Status changed on ${changedStatus}`
         });
     }
-    // удаление задания из списка
+    /**
+     * @description удаляет задание из списка
+     * @param index - индекс задания, на котором была нажата кнопка Delete
+     */
     public deleteTask = (index: number) => {
-        // добавляет событие в массив logTask (история изменений)
         this.logTask.push({
             name: this.todoList[index].name,
             date: moment(),
@@ -60,12 +69,29 @@ class TodoController {
         });
         this.todoList.splice(index, 1);
     }
-    // очистка лога
+    /**
+     * @description функция сортировки значений таблицы по убыванию/возрастанию
+     * @param field поле, по которому происходит сортировка. В разметке при вызове функции sortTask передается название столбца, на котором нужна фильтрация
+     * @param clear - необязательный параметр, определяющий, нажата ли кнопка Cancel Filters (если данная кнопка нажала, то функция вызывается с двумя параметрами: position, true)
+     */
+    public sortTask = (field: string, clear?: boolean) => {
+        if (clear || !angular.equals(this.orderByField, field)) {
+            this.reverseSort = false;
+        } else {
+            this.reverseSort = !this.reverseSort;
+        }
+        this.orderByField = field;
+        this.logTask.push({
+            name: '--',
+            date: moment(),
+            action: clear ? 'Cancel sort and filter' : `Sort by ${field}. Reverse: ${this.reverseSort}`
+        });
+    }
+    /**
+     * @description функция очистки лога текущих событий
+     */
     public clearLog = () => {
         this.logTask.splice(0, this.logTask.length);
-    }
-    public info = () => {
-        console.log('Reverse is ', this.reverseSort, '\nOrderField is ', this.orderByFiled);
     }
 }
 

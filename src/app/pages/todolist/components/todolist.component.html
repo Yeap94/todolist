@@ -1,43 +1,61 @@
-<div class = "task-container">
+<div class="task-container">
     <div>
-        <input type="text" placeholder = "New task name" ng-model = "vm.newTaskName" maxlength="50">
-        <button ng-click = "vm.addNewTask()" ng-disabled = "!vm.newTaskName">Add Task</button>
-        <input type="text" placeholder="Search..." ng-model = "vm.taskFilter" maxlength="50">
-        <button ng-click = "vm.orderByFeild='position'; vm.reverseSort = false; vm.taskFilter = ''">Cancel filters</button>
+        <input type="text" placeholder="New task name" ng-model="vm.newTaskName" maxlength="50" ng-keydown="vm.addNewTask($event)">
+        <button ng-click="vm.addNewTask()" ng-disabled="!vm.newTaskName">Add Task</button>
+        <input type="text" placeholder="Search..." ng-model="vm.taskFilter" maxlength="50">
+        <button ng-click="vm.sortTask('position', true); vm.taskFilter=null" >Cancel filters</button>
     </div>
-    <table class = "table-style">
+    <table class="table-style">
         <thead>
-            <th>№</th>
             <th>
-                <a href = "" ng-click = "vm.orderByFeild='date'; vm.reverseSort = !vm.reverseSort; vm.info()">Creation Date</a>
+                <a href="" ng-click="vm.sortTask('position')">№</a>
+                <span ng-show="vm.orderByField == 'position'">
+                    <span ng-show="vm.reverseSort">↑</span>
+                    <span ng-show="!vm.reverseSort">↓</span>
+                </span>
             </th>
             <th>
-                <a href = "" ng-click = "vm.orderByFeild='name'; vm.reverseSort = !vm.reverseSort; vm.info()">Task Name</a> 
+                <a href="" ng-click="vm.sortTask('date')">Creation Date</a>
+                <span ng-show="vm.orderByField == 'date'">
+                    <span ng-show="vm.reverseSort">↑</span>
+                    <span ng-show="!vm.reverseSort">↓</span>
+                </span>
             </th>
             <th>
-                <a href = "" ng-click = "vm.orderByFeild='status'; vm.reverseSort = !vm.reverseSort; vm.info()">Status</a> 
+                <a href="" ng-click="vm.sortTask('name')">Task Name</a> 
+                <span ng-show="vm.orderByField == 'name'">
+                    <span ng-show="vm.reverseSort">↑</span>
+                    <span ng-show="!vm.reverseSort">↓</span>
+                </span>
+            </th>
+            <th>
+                <a href="" ng-click="vm.sortTask('status')">Status</a>
+                <span ng-show="vm.orderByField == 'status'">
+                    <span ng-show="vm.reverseSort">↑</span>
+                    <span ng-show="!vm.reverseSort">↓</span>
+                </span>
             </th>
             <th>Actions</th>
         </thead>
         <tbody>
-            <tr ng-repeat = "task in vm.todoList | filter: vm.taskFilter | orderBy:vm.orderByFeild:vm.reverseSort track by $index">
+            <tr ng-repeat="task in vm.todoList | filter: vm.taskFilter | orderBy:vm.orderByField:vm.reverseSort track by $index">
                 <td>{{task.position}}</td>
                 <td>{{task.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
                 <td>{{task.name}}</td>
                 <td>
-                    <input type="checkbox" ng-model = "task.status" ng-click = "vm.changeTaskStatus(task)">
+                    <input type="checkbox" ng-model="task.status" ng-click="vm.changeTaskStatus(task)">
                 </td>
                 <td>
-                    <button ng-click = "vm.changeTaskStatus(task)" ng-if = "!task.status" class="done-undone">Done</button>
-                    <button ng-click = "vm.changeTaskStatus(task)" ng-if = "task.status" class="done-undone">Undone</button>
-                    <button ng-click = "vm.deleteTask($index)">Delete</button>
+                    <button ng-click="vm.changeTaskStatus(task)" ng-if="!task.status" class="done-undone">Done</button>
+                    <button ng-click="vm.changeTaskStatus(task)" ng-if="task.status" class="done-undone">Undone</button>
+                    <button ng-click="vm.deleteTask($index)">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-<div class = "task-container">
-    <table class = "table-style">
+<div class="task-container">
+    <table class="table-style">
         <thead>
             <th>№</th>
             <th>Action Date</th>
@@ -45,7 +63,7 @@
             <th>Action</th>
         </thead>
         <tbody>
-            <tr ng-repeat = "log in vm.logTask | filter: vm.taskFilter track by $index">
+            <tr ng-repeat="log in vm.logTask | filter: vm.taskFilter track by $index">
                 <td>{{$index+1}}</td>
                 <td>{{log.date.format("DD-MM-YYYY HH:mm")}}</td>
                 <td>{{log.name}}</td>
@@ -53,5 +71,5 @@
             </tr>
         </tbody>
     </table>
-    <button ng-click = "vm.clearLog()">Clear Log</button>
+    <button ng-click="vm.clearLog()">Clear Log</button>
 </div>
