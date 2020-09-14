@@ -9,9 +9,14 @@ class TodoController {
     private reverseSort: boolean = false;
     private orderByField: string = 'position';
     private newTaskName: string;
+    private importance: string;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
+    constructor (
+        private $state: ng.ui.IStateService
+    ) {
 
+    }
     $onInit = () => {
         this.todoList.push(
             {
@@ -99,6 +104,13 @@ class TodoController {
      */
     public clearLog = () => {
         this.logTask.splice(0, this.logTask.length);
+    }
+
+    /**
+     * @description
+     */
+    public backHome = () => {
+        this.$state.go('homepage');
     }
 }
 
