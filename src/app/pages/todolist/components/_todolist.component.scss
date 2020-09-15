@@ -14,14 +14,20 @@
     .date {
         width: 400px;
     }
-    .name {
+    .name-task-todo {
         width: 890px;
     }
     .status {
         width: 100px;
     }
-    .action {
+    .action-button {
         width: 400px;
+    }
+    .name-task-log {
+        width: 500px;
+    }
+    .action-log {
+        width: 874px;
     }
 }
 .done-undone {
@@ -38,4 +44,19 @@
 }
 .add {
     background-color: lightgreen;
+}
+.delete {
+    background-color: red;
+}
+.changestatus {
+    background-color: lightsalmon;
+}
+.filters {
+    background-color: rgb(212, 205, 196);
+}
+.log-row {
+    td {
+        border: 5px solid white;
+        border-radius: 14px;
+    }
 }

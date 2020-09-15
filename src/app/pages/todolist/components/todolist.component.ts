@@ -9,7 +9,6 @@ class TodoController {
     private reverseSort: boolean = false;
     private orderByField: string = 'position';
     private newTaskName: string;
-    private importance: string;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
     constructor (
@@ -42,7 +41,8 @@ class TodoController {
             this.logTask.push({
                 name: this.newTaskName,
                 date: moment(),
-                action: 'Add'
+                action: 'Add',
+                importance: 'add'
             });
             this.newTaskName = null;
         }
@@ -63,7 +63,8 @@ class TodoController {
         this.logTask.push({
             name: task.name,
             date: moment(),
-            action: `Status changed on ${changedStatus}`
+            action: `Status changed on ${changedStatus}`,
+            importance: 'changestatus'
         });
     }
 
@@ -75,7 +76,8 @@ class TodoController {
         this.logTask.push({
             name: this.todoList[index].name,
             date: moment(),
-            action: 'Delete'
+            action: 'Delete',
+            importance: 'delete'
         });
         this.todoList.splice(index, 1);
     }
@@ -95,7 +97,8 @@ class TodoController {
         this.logTask.push({
             name: '--',
             date: moment(),
-            action: clear ? 'Cancel sort and filter' : `Sort by ${field}. Reverse: ${this.reverseSort}`
+            action: clear ? 'Cancel sort and filter' : `Sort by ${field}. Reverse: ${this.reverseSort}`,
+            importance: 'filters'
         });
     }
 
@@ -107,7 +110,7 @@ class TodoController {
     }
 
     /**
-     * @description
+     * @description возврат на домашнюю страницу
      */
     public backHome = () => {
         this.$state.go('homepage');

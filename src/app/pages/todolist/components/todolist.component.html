@@ -21,7 +21,7 @@
                     <span ng-show="!vm.reverseSort">↓</span>
                 </span>
             </th>
-            <th class="name">
+            <th class="name-task-todo">
                 <a href="" ng-click="vm.sortTask('name')">Task Name</a> 
                 <span ng-show="vm.orderByField == 'name'">
                     <span ng-show="vm.reverseSort">↑</span>
@@ -35,15 +35,17 @@
                     <span ng-show="!vm.reverseSort">↓</span>
                 </span>
             </th>
-            <th class="action">Actions</th>
+            <th class="action-button">Actions</th>
         </thead>
         <tbody>
-            <tr ng-repeat="task in vm.todoList | filter: vm.taskFilter | orderBy:vm.orderByField:vm.reverseSort track by $index" ng-class-even="'line'" ng-class="{statusdone: task.status}">
+            <tr ng-repeat="task in vm.todoList | filter: vm.taskFilter | orderBy:vm.orderByField:vm.reverseSort track by $index" 
+                ng-class-even="'line'" 
+                ng-class="{statusdone: task.status}">
                 <td>{{task.position}}</td>
                 <td>{{task.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
                 <td>{{task.name}}</td>
                 <td>
-                    <input type="checkbox" id="taskstatus" ng-model="task.status" ng-click="vm.changeTaskStatus(task)">
+                    <input type="checkbox" ng-model="task.status" ng-click="vm.changeTaskStatus(task)">
                 </td>
                 <td>
                     <button ng-click="vm.changeTaskStatus(task)" ng-if="!task.status" class="done-undone">Done</button>
@@ -57,15 +59,19 @@
 <div class="task-container">
     <table class="table-style">
         <thead>
-            <th >№</th>
-            <th>Action Date</th>
-            <th>Task Name</th>
-            <th>Action</th>
+            <th class="position">№</th>
+            <th class="date">Action Date</th>
+            <th class="name-task-log">Task Name</th>
+            <th class="action-log">Action</th>
         </thead>
         <tbody>
-            <tr ng-repeat="log in vm.logTask | filter: vm.taskFilter track by $index">
+            <tr ng-repeat="log in vm.logTask | filter: vm.taskFilter track by $index" 
+                ng-class="{add: log.importance == 'add', 
+                            delete: log.importance == 'delete', 
+                            changestatus: log.importance == 'changestatus', 
+                            filters: log.importance == 'filters'}" class = "log-row">
                 <td>{{$index+1}}</td>
-                <td>{{log.date.format("DD-MM-YYYY HH:mm")}}</td>
+                <td>{{log.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
                 <td>{{log.name}}</td>
                 <td>{{log.action}}</td>
             </tr>
