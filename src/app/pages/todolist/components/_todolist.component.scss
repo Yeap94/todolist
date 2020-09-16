@@ -1,34 +1,14 @@
+.default-container {
+    max-height: 5vh;
+    padding: 15px;
+}
 .task-container {
-    height: 42vh; 
+    height: 42vh;
     border: 3px solid black;
     border-radius: 15px;
     margin: 7px;
     overflow: auto;
-}
-.table-style {
-    width: 100%;
-    text-align: center;
-    .position {
-        width: 100px;
-    }
-    .date {
-        width: 400px;
-    }
-    .name-task-todo {
-        width: 890px;
-    }
-    .status {
-        width: 100px;
-    }
-    .action-button {
-        width: 400px;
-    }
-    .name-task-log {
-        width: 500px;
-    }
-    .action-log {
-        width: 874px;
-    }
+    width: relative;
 }
 .done-undone {
     width: 61px;
@@ -58,5 +38,92 @@
     td {
         border: 5px solid white;
         border-radius: 14px;
+    }
+}
+
+@media (max-width: 430px) {
+    th, td {
+        width: 20%;
+        div {
+            padding-inline: 15px;
+            max-width: 150px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+        }
+    }
+    
+}
+
+@media (min-width: 430px) and (max-width: 475px) {
+    th, td {
+        width: 20%;
+        div {
+            padding-inline: 15px;
+            max-width: 162px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+        }
+    }
+    
+}
+@media (min-width: 475px) and (max-width: 575px) {
+    th, td {
+        width: 20%;
+        div {
+            padding-inline: 15px;
+            max-width: 209px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+        }
+    }
+    
+}
+@media (min-width: 575px) and (max-width: 611px) {
+    th, td {
+        width: 20%;
+        div {
+            padding-inline: 15px;
+            max-width: 300px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+        }
+    }
+    
+}
+
+@media (min-width: 611px) {
+    .table-style {
+        width: 100%;
+        text-align: center;
+        .position {
+            width: 5%;
+        }
+        
+        .date {
+            width: 10%;
+        }
+        .name-task-todo {
+            width: 70%;
+        }
+        .status {
+            width: 5%;
+        }
+        .action-button {
+            width: 10%;
+        }
+        .name-task-log {
+            width: 70%;
+        }
+        .action-log {
+            width: 15%;
+        }
     }
 }

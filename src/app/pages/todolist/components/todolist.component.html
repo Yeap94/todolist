@@ -1,4 +1,4 @@
-<div>
+<div class="default-container">
     <input type="text" placeholder="New task name" ng-model="vm.newTaskName" maxlength="50" ng-keydown="vm.addNewTask($event)">
     <button ng-click="vm.addNewTask();" ng-disabled="!vm.newTaskName">Add Task</button>
     <input type="text" placeholder="Search..." ng-model="vm.taskFilter" maxlength="50">
@@ -43,7 +43,9 @@
                 ng-class="{statusdone: task.status}">
                 <td>{{task.position}}</td>
                 <td>{{task.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
-                <td>{{task.name}}</td>
+                <td>
+                    <div>{{task.name}}</div>
+                </td>
                 <td>
                     <input type="checkbox" ng-model="task.status" ng-click="vm.changeTaskStatus(task)">
                 </td>
@@ -72,13 +74,15 @@
                             filters: log.importance == 'filters'}" class = "log-row">
                 <td>{{$index+1}}</td>
                 <td>{{log.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
-                <td>{{log.name}}</td>
+                <td>
+                    <div>{{log.name}}</div>
+                </td>
                 <td>{{log.action}}</td>
             </tr>
         </tbody>
     </table>
 </div>
-<div>
+<div class="default-container">
     <button ng-click="vm.clearLog()">Clear Log</button>
     <button ng-click="vm.backHome()" class="home-button">Back on homepage</button>
 </div>
