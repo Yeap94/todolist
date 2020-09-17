@@ -1,0 +1,13 @@
+<div>Hellooooooooooooooo</div>
+<button ng-click = "vm.goCart()">Cart</button>
+
+<div>
+    <ul>
+        <li ng-repeat = "product in vm.allProducts track by $index">
+            {{product.name}} {{product.price | currency: $ }}
+            <button>Add in cart</button>
+        </li>
+    </ul>
+</div>
+<button ng-click = "vm.generateRandomDiscount()">Gen random</button>
+<button ng-click = "vm.goDiscount()">Go discount</button>

@@ -10,6 +10,9 @@ class HomePageController {
     public goTodo = () => {
         this.$state.go('todolist');
     }
+    public goShop = () => {
+        this.$state.go('shop');
+    }
 }
 
 export class HomePage implements angular.IComponentOptions {

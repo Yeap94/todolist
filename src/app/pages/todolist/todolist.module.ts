@@ -4,7 +4,7 @@ import { Todolist } from './components/todolist.component';
 
 export const moduleName =
     angular
-        .module('application.home', ['ui.router'])
+        .module('application.todo', ['ui.router'])
         .component(Todolist.selector, Todolist)
         .config(routing)
         .name;
