@@ -1,4 +1,6 @@
 export interface IProduct {
-    name: string,
-    price: number
-} 
+    name: string;
+    price: number;
+    discountPrice: number;
+    priceChanged:boolean;
+}

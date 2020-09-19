@@ -1,50 +1,81 @@
 import * as angular from 'angular';
 import { IProduct } from '../../../models/product.interface';
+import { RandomizerService } from '../../../services/randomizer.service';
 class ShopController {
-    private discount: number;
+    private randomIndex: number;
+    private randomDiscount: number;
     private allProducts: Array<IProduct> = [
         {
             name: 'Ball',
-            price: 145
+            price: 145,
+            discountPrice: 145,
+            priceChanged: false
         },
         {
             name: 'Chair',
-            price: 4587
+            price: 4587,
+            discountPrice: 4587,
+            priceChanged: false
         },
         {
             name: 'Computer',
-            price: 20567
+            price: 20567,
+            discountPrice: 20567,
+            priceChanged: false
+        },
+        {
+            name: 'Book',
+            price: 425,
+            discountPrice: 425,
+            priceChanged: false
+        },
+        {
+            name: 'Phone',
+            price: 784,
+            discountPrice: 784,
+            priceChanged: false
+        },
+        {
+            name: 'House',
+            price: 251360,
+            discountPrice: 251360,
+            priceChanged: false
+        },
+        {
+            name: 'TV',
+            price: 1300,
+            discountPrice: 1300,
+            priceChanged: false
         }
     ];
+
     constructor (
         private $state: ng.ui.IStateService,
         private $timeout: ng.ITimeoutService,
-        private $interval: ng.IIntervalService
+        private $interval: ng.IIntervalService,
+        private $scope: ng.IScope,
+        private randomService: RandomizerService
     ) {
-
+        this.$scope.$watch(() => {
+            return this.randomService.getRandomIndex();
+        }, (newValue, oldValue) => {
+            this.randomIndex = newValue;
+        });
+        this.$scope.$watch(() => {
+            return this.randomService.getRandomDiscount();
+        }, (newValue, oldValue) => {
+            for (let i = 0; i < this.allProducts.length; i++) {
+                this.allProducts[i].priceChanged = false;
+            }
+            this.allProducts[this.randomIndex].priceChanged = true;
+            this.allProducts[this.randomIndex].discountPrice = this.allProducts[this.randomIndex].price * newValue;
+        });
     }
     public goCart = () => {
         this.$state.go('cart');
     }
-    /**
-     * @description генерирует случайное число от 0.01 до 0.99 - проценты скидки. floor - округляет число в меньшую сторону, random получает рандомное число от 0 до 1
-     */
-    public generateRandomDiscount = () => {
-        this.discount = (Math.floor(Math.random() * 100) + 1) / 100;
-        console.log('discount: ', this.discount);
-    }
-    /**
-     * @description timeout для теста функции, потому что interval постоянно домножает НОВУЮ цену на скидку. Timeout позже заменить на интервал
-     */
-    public goDiscount = () => {
-        this.$timeout(() => {
-            this.generateRandomDiscount();
-            for (let i = 0; i < 3; i++) {
-                let oldPrice = this.allProducts[i].price ;
-                this.allProducts[i].price = oldPrice * (1 - this.discount);
-                console.log('Prices: ', this.allProducts[i].price);
-            }
-        }, 1000);
+    public backHome = () => {
+        this.$state.go('homepage');
     }
 }
 export class Shop implements angular.IComponentOptions {

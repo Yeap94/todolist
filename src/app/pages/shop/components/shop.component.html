@@ -4,10 +4,12 @@
 <div>
     <ul>
         <li ng-repeat = "product in vm.allProducts track by $index">
-            {{product.name}} {{product.price | currency: $ }}
+            {{product.name}} 
+            <span ng-if = "!product.priceChanged">{{product.price | currency: $ }}</span>
+            <span ng-if = "product.priceChanged">{{product.discountPrice | currency: $ }}</span>
             <button>Add in cart</button>
         </li>
     </ul>
 </div>
-<button ng-click = "vm.generateRandomDiscount()">Gen random</button>
-<button ng-click = "vm.goDiscount()">Go discount</button>
+<button ng-click = "vm.backHome()">Gen random</button>
+
