@@ -9,7 +9,8 @@ export class RandomizerService {
     private productsLength: number = products.length;
 
     constructor (
-        private $interval: ng.IIntervalService
+        private $interval: ng.IIntervalService,
+        private $state: angular.ui.IStateService
     ) {
         this.randomize();
     }
@@ -34,5 +35,19 @@ export class RandomizerService {
 
     public getIsRandomizeStart = (): boolean => {
         return this.isRandomizeStart;
+    }
+    public goTodo = () => {
+        this.$state.go('todolist');
+    }
+
+    public goShop = () => {
+        this.$state.go('shop');
+    }
+    public goCart = () => {
+        this.$state.go('cart');
+    }
+
+    public goHome = () => {
+        this.$state.go('homepage');
     }
 }

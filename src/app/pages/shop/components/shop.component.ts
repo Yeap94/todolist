@@ -32,14 +32,6 @@ export class ShopController {
             }
         );
     }
-
-    public goCart = () => {
-        this.$state.go('cart');
-    }
-
-    public backHome = () => {
-        this.$state.go('homepage');
-    }
 }
 
 export class Shop implements angular.IComponentOptions {

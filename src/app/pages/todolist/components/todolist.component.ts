@@ -108,13 +108,6 @@ class TodoController {
     public clearLog = () => {
         this.logTask.splice(0, this.logTask.length);
     }
-
-    /**
-     * @description возврат на домашнюю страницу
-     */
-    public backHome = () => {
-        this.$state.go('homepage');
-    }
 }
 
 export class Todolist implements angular.IComponentOptions {

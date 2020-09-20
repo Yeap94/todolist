@@ -11,6 +11,10 @@ import { moduleName as cartModule } from './pages/cart/cart.module';
  * Import Application Services
  */
 import { RandomizerService } from './services/randomizer.service';
+/**
+ * Import Application Directives
+ */
+import { NavbarDirective, selector } from './directives/navbardirective/navbar.directive';
 
 export const moduleName =
   angular.module('application', [
@@ -21,4 +25,5 @@ export const moduleName =
     cartModule
   ])
   .service(RandomizerService.selector, RandomizerService)
+  .directive(selector, NavbarDirective)
   .name;

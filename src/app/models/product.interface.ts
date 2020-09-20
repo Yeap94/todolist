@@ -3,5 +3,5 @@ export interface IProduct {
     price: number;
     discountPrice: number;
     priceChanged:boolean;
-    image: string;
+    logo: string;
 }
