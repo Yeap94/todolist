@@ -1,37 +1,38 @@
-import * as angular from 'angular';
+import { products } from './../pages/shop/components/products';
 
 export class RandomizerService {
-    public static selector = 'randomService';
+
+    public static selector = 'RandomService';
     private randomIndex: number;
     private randomDiscount: number;
-    private startedIndex: boolean = false;
-    private startedDiscount: boolean = false;
+    private isRandomizeStart: boolean = false;
+    private productsLength: number = products.length;
 
     constructor (
         private $interval: ng.IIntervalService
     ) {
+        this.randomize();
+    }
 
+    public randomize = (): void => {
+        if (!this.isRandomizeStart) {
+            this.isRandomizeStart = true;
+            this.$interval(() => {
+                this.randomIndex = Math.floor(Math.random() * this.productsLength);
+                this.randomDiscount = (Math.floor(Math.random() * 100) + 1) / 100;
+            }, 1000);
+        }
     }
 
     public getRandomIndex = (): number => {
-        if (!this.startedIndex) {
-            this.startedIndex = true;
-            this.$interval(() => {
-                this.randomIndex = Math.floor(Math.random() * 100) % 7;
-            }, 5000);
-        }
         return this.randomIndex;
     }
-    /**
-     * @description генерирует случайное число от 0.01 до 0.99 - проценты скидки. floor - округляет число в меньшую сторону, random получает рандомное число от 0 до 1
-     */
-    public getRandomDiscount = () => {
-        if (!this.startedDiscount) {
-            this.startedDiscount = true;
-            this.$interval(() => {
-                this.randomDiscount = (Math.floor(Math.random() * 100) + 1) / 100;
-            }, 5000);
-        }
+
+    public getRandomDiscount = (): number => {
         return this.randomDiscount;
+    }
+
+    public getIsRandomizeStart = (): boolean => {
+        return this.isRandomizeStart;
     }
 }

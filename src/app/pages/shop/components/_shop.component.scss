@@ -1,0 +1,10 @@
+.product-item {
+    background-color: khaki;
+    width: 150px;
+    height: 250px;
+}
+
+.product-item:hover {
+    background-color: blueviolet;
+    transition: 3s;
+}
