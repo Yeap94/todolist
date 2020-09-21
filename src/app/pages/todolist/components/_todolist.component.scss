@@ -8,7 +8,6 @@
     border-radius: 15px;
     margin: 7px;
     overflow: auto;
-    width: relative;
 }
 .done-undone {
     width: 61px;
@@ -103,6 +102,9 @@
     .table-style {
         width: 100%;
         text-align: center;
+        th {
+            border-bottom: 3px solid black;
+        }
         .position {
             width: 5%;
         }

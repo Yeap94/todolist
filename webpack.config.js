@@ -43,29 +43,16 @@ module.exports = {
                     publicPath: './../'
                 }),
             },
-
             {
-                test: /\.(jpg|jpeg)$/,
+                test: /.(jpg|jpeg|png|gif)$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
                         esModule: false,
                         name: 'images/[name].[ext]'
                     }
-                }],
+                }]
             },
-
-            {
-                test: /\.(png|gify)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        esModule: false,
-                        name: 'icons/[name].[ext]'
-                    }
-                }],
-            },
-
             {
                 test: /\.(svg|woff|woff2|eot|ttf)$/,
                 use: 'file-loader?outputPath=fonts/'

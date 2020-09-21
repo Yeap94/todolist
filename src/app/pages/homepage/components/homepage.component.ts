@@ -1,14 +1,11 @@
 import * as angular from 'angular';
+import { RandomizerService } from './../../../services/randomizer.service';
 
 class HomePageController {
     constructor (
-        private $state: angular.ui.IStateService
+        private RandomService: RandomizerService
     ) {
 
-    }
-
-    public goTodo = () => {
-        this.$state.go('todolist');
     }
 }
 
