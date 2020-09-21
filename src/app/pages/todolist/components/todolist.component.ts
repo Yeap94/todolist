@@ -11,11 +11,7 @@ class TodoController {
     private newTaskName: string;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
-    constructor (
-        private $state: ng.ui.IStateService
-    ) {
 
-    }
     $onInit = () => {
         this.todoList.push(
             {

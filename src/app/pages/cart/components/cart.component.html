@@ -1,1 +1,28 @@
-<div>on cart page</div>
+<!-- <div>on cart page</div> -->
+<div>
+    <span ng-if="vm.cartProducts.length === 0">
+        Your cart is empty
+    </span>
+    <ol>
+        <li ng-repeat="cartProduct in vm.cartProducts track by $index">
+            <div>
+                <img ng-src="images/{{cartProduct.name}}.png" width="10" height="10" alt="{{product.name}}">
+            </div>
+            <div>
+                {{cartProduct.name}}
+            </div>
+            <div>
+                <span>Price: {{cartProduct.price | currency: $ }} </span>
+            </div>
+            <div>
+                <span>Count: {{cartProduct.count}}</span>
+            </div>
+            <div>
+                <button ng-click="vm.deleteFromCart($index)">Delete</button>
+            </div>
+            <div>
+        </li>
+    </ol>
+    <button ng-click="vm.clearCart()">Clear cart</button>
+</div>
+<div>{{vm.RandomService.cartProductsCount}}</div>

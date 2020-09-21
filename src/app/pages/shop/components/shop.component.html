@@ -1,11 +1,9 @@
 <div>Hellooooooooooooooo</div>
-<button ng-click="vm.goCart()">Cart</button>
-
 <div>
    <ol>
        <li ng-repeat="product in vm.allProducts track by $index" class="product-item">
            <div>
-               <img src="{{product.logo}}" width="100" height="100" alt="{{product.name}}">
+               <img ng-src="images/{{product.name}}.png" width="100" height="100" alt="{{product.name}}">
            </div>
            <div>
                {{product.name}}
@@ -15,10 +13,9 @@
                <span ng-if="product.priceChanged">Price: {{product.discountPrice | currency: $ }} </span>
            </div>
            <div>
-               <button>Add to cart</button>
+               <button ng-click="vm.addToCart($index)">Add to cart</button>
            </div>
        </li>
    </ol>
 </div>
-<button ng-click="vm.backHome()">Go home</button>
 

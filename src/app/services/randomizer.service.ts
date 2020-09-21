@@ -1,4 +1,7 @@
+import * as _ from 'underscore';
 import { products } from './../pages/shop/components/products';
+import { cartProducts } from './../pages/cart/components/cartproucts';
+import { ICartProduct } from './../models/cartproduct.interface';
 
 export class RandomizerService {
 
@@ -7,10 +10,12 @@ export class RandomizerService {
     private randomDiscount: number;
     private isRandomizeStart: boolean = false;
     private productsLength: number = products.length;
+    private cartProductsCount: number = 0;
+    private cartProducts: Array<ICartProduct> = cartProducts;
+
 
     constructor (
         private $interval: ng.IIntervalService,
-        private $state: angular.ui.IStateService
     ) {
         this.randomize();
     }
@@ -36,18 +41,10 @@ export class RandomizerService {
     public getIsRandomizeStart = (): boolean => {
         return this.isRandomizeStart;
     }
-    public goTodo = () => {
-        this.$state.go('todolist');
+    public calcCartCount = (): void => {
+        this.cartProductsCount = _.reduce(this.cartProducts, (count: number, product: ICartProduct) => count + product.count, 0);
     }
-
-    public goShop = () => {
-        this.$state.go('shop');
-    }
-    public goCart = () => {
-        this.$state.go('cart');
-    }
-
-    public goHome = () => {
-        this.$state.go('homepage');
+    public getcalcCartCount = (): number => {
+        return this.cartProductsCount;
     }
 }
