@@ -45,6 +45,7 @@ export class RandomizerService {
         this.cartProductsCount = _.reduce(this.cartProducts, (count: number, product: ICartProduct) => count + product.count, 0);
     }
     public getcalcCartCount = (): number => {
+        this.cartProductsCount = 0;
         return this.cartProductsCount;
     }
 }

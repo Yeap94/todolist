@@ -18,6 +18,7 @@ class CartController {
 
     public clearCart = () => {
         this.cartProducts.splice(0, this.cartProducts.length);
+        this.RandomService.getcalcCartCount();
     }
 }
 

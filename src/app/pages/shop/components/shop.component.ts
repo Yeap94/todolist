@@ -38,7 +38,7 @@ export class ShopController {
         let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === this.allProducts[index].name);
         if (productInCart !== undefined) {
             let productInCartIndex = this.cartProducts.indexOf(productInCart);
-            this.cartProducts[productInCartIndex].price += this.allProducts[index].price;
+            this.cartProducts[productInCartIndex].price += this.allProducts[index].discountPrice;
             this.cartProducts[productInCartIndex].count++;
             console.log('Cart products', this.cartProducts);
             this.RandomService.calcCartCount();
