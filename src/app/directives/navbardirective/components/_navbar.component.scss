@@ -1,0 +1,30 @@
+
+.buttons-block {
+    background: linear-gradient(to left, #2c3e50, #bdc3c7);
+    span {
+        position: fixed;
+        top: 10px;
+        left: 400px;
+    }
+
+    button {
+        background-color: rgb(226, 221, 174);
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 10px; 
+        height: 25px;
+        width: 101px;
+    }
+    button:hover {
+        background-color: rgb(116, 190, 240);
+        transition: 1.5s;
+    }
+    .home-button {
+        float: right;
+        width: 200px;
+    }
+    .home-button:hover {
+        background-color: rgb(218, 93, 84);
+        transition: 1.5s;
+    }
+}

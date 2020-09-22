@@ -1,42 +1,46 @@
-.default-container {
-    max-height: 5vh;
-    padding: 15px;
-}
-.task-container {
-    height: 42vh;
-    border: 3px solid black;
-    border-radius: 15px;
-    margin: 7px;
-    overflow: auto;
-}
-.done-undone {
-    width: 61px;
-}
-.home-button {
-    float: right;
-}
-.line{
-    background-color: rgba(238, 238, 238, 0.945);
-}
-.statusdone {
-    color: green;
-}
-.add {
-    background-color: lightgreen;
-}
-.delete {
-    background-color: red;
-}
-.changestatus {
-    background-color: lightsalmon;
-}
-.filters {
-    background-color: rgb(212, 205, 196);
-}
-.log-row {
-    td {
-        border: 5px solid white;
-        border-radius: 14px;
+.main {
+    height: 100%;
+    width: 100%;
+    .default-container {
+        height: 2%;
+        padding: 15px;
+    }
+    .task-container {
+        height: 42%;
+        border: 3px solid black;
+        border-radius: 15px;
+        margin: 7px;
+        overflow: auto;
+    }
+    .done-undone {
+        width: 61px;
+    }
+    .home-button {
+        float: right;
+    }
+    .line{
+        background-color: rgba(238, 238, 238, 0.945);
+    }
+    .statusdone {
+        color: green;
+    }
+    .add {
+        background-color: lightgreen;
+    }
+    .delete {
+        background-color: red;
+    }
+    .changestatus {
+        background-color: lightsalmon;
+    }
+    .filters {
+        background-color: rgb(212, 205, 196);
+    }
+    .log-row {
+        td {
+            border: 5px solid white;
+            border-radius: 14px;
+        }
     }
 }
 

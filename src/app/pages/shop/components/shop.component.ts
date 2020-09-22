@@ -40,7 +40,6 @@ export class ShopController {
             let productInCartIndex = this.cartProducts.indexOf(productInCart);
             this.cartProducts[productInCartIndex].price += this.allProducts[index].discountPrice;
             this.cartProducts[productInCartIndex].count++;
-            console.log('Cart products', this.cartProducts);
             this.RandomService.calcCartCount();
         } else {
             this.cartProducts.push({
