@@ -3,6 +3,7 @@
 @import './../directives/navbardirective/components/navbar.component';
 @import'./../pages/homepage/components/homepage.component';
 @import'./../../app/core/components/root.component';
+@import'./../pages/cart/components/cart.component';
 
 body {
     height: 100vh;
@@ -10,7 +11,7 @@ body {
     padding: 0;
     width: 100%;
     .root{
-        height: 938px;
+        height: 100%;
         display: inline-block;
         width: 100%;
     }

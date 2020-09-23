@@ -1,13 +1,13 @@
 <div class = "main">
     <div class="default-container">
         <input type="text" placeholder="New task name" ng-model="vm.newTaskName" maxlength="50" ng-keydown="vm.addNewTask($event)">
-        <button ng-click="vm.addNewTask();" ng-disabled="!vm.newTaskName">Add Task</button>
+        <button ng-click="vm.addNewTask();" ng-disabled="!vm.newTaskName" class="system-button">Add Task</button>
         <input type="text" placeholder="Search..." ng-model="vm.taskFilter" maxlength="50">
-        <button ng-click="vm.sortTask('position', true); vm.taskFilter=null" >Cancel filters</button>
+        <button ng-click="vm.sortTask('position', true); vm.taskFilter=null" class="system-button">Cancel filters</button>
     </div>  
     <div class="task-container">
         <table class="table-style">
-            <thead class = "head-border">
+            <thead class="table-head">
                 <th class="position">
                     <a href="" ng-click="vm.sortTask('position')">№</a>
                     <span ng-show="vm.orderByField == 'position'">
@@ -40,8 +40,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="task in vm.todoList | filter: vm.taskFilter | orderBy:vm.orderByField:vm.reverseSort track by $index" 
-                    ng-class-even="'line'" 
-                    ng-class="{statusdone: task.status}">
+                    ng-class="{statusdone: task.status}"
+                    class="todo-line">
                     <td>{{task.position}}</td>
                     <td>{{task.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
                     <td>
@@ -51,9 +51,9 @@
                         <input type="checkbox" ng-model="task.status" ng-click="vm.changeTaskStatus(task)">
                     </td>
                     <td>
-                        <button ng-click="vm.changeTaskStatus(task)" ng-if="!task.status" class="done-undone">Done</button>
-                        <button ng-click="vm.changeTaskStatus(task)" ng-if="task.status" class="done-undone">Undone</button>
-                        <button ng-click="vm.deleteTask($index)">Delete</button>
+                        <button ng-click="vm.changeTaskStatus(task)" ng-if="!task.status" class="done-button">Done</button>
+                        <button ng-click="vm.changeTaskStatus(task)" ng-if="task.status" class="undone-button">Undone</button>
+                        <button ng-click="vm.deleteTask($index)" class="delete-button">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -61,7 +61,7 @@
     </div>
     <div class="task-container">
         <table class="table-style">
-            <thead>
+            <thead class="table-head">
                 <th class="position">№</th>
                 <th class="date">Action Date</th>
                 <th class="name-task-log">Task Name</th>
@@ -72,7 +72,7 @@
                     ng-class="{add: log.importance == 'add', 
                                 delete: log.importance == 'delete', 
                                 changestatus: log.importance == 'changestatus', 
-                                filters: log.importance == 'filters'}" class = "log-row">
+                                filters: log.importance == 'filters'}">
                     <td>{{$index+1}}</td>
                     <td>{{log.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
                     <td>
@@ -84,7 +84,6 @@
         </table>
     </div>
     <div class="default-container">
-        <button ng-click="vm.clearLog()">Clear Log</button>
-        <button ng-click="vm.backHome()" class="home-button">Back on homepage</button>
+        <button ng-click="vm.clearLog()" class="system-button">Clear Log</button>
     </div>    
 </div>

@@ -1,46 +1,124 @@
 .main {
-    height: 100%;
+    background-image: url(./images/todobckg.jpg);
+    height: 95.8%;
     width: 100%;
+    padding-top: 40px;
+    background-size: cover;
+    input {
+        width: 300px;
+        font-size: 13px;
+        padding: 6px 0 4px 10px;
+        border: 1px solid #cecece;
+        background: #F6F6f6;
+        border-radius: 8px;
+    }
     .default-container {
-        height: 2%;
+        height: 5%;
         padding: 15px;
+        padding-top: 30px;
+        padding-bottom: 0;
     }
     .task-container {
-        height: 42%;
+        height: 39%;
         border: 3px solid black;
         border-radius: 15px;
         margin: 7px;
         overflow: auto;
+        overflow-x: hidden;
+        .table-head {
+            background: linear-gradient(to right, rgba(33, 147, 176, 0.4), rgba(109, 213, 237, 0.4));
+        }
     }
-    .done-undone {
-        width: 61px;
+    
+    .done-button {background-image: linear-gradient(to right, #1D976C 0%, #93F9B9  51%, #1D976C  100%)}
+    .done-button {
+       text-align: center;
+       text-transform: uppercase;
+       transition: 0.5s;
+       background-size: 200% auto;
+       color: white;            
+       box-shadow: 0 0 20px #eee;
+       border-radius: 10px;
+       width: 73px;
+     }
+
+     .done-button:hover {
+       background-position: right center; /* change the direction of the change here */
+       color: #fff;
+       text-decoration: none;
+     }
+     
+     .undone-button {background-image: linear-gradient(to right, #F09819 0%, #EDDE5D  51%, #F09819  100%)}
+     .undone-button {
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        width: 73px;
+      }
+
+    .undone-button:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
     }
-    .home-button {
-        float: right;
+    
+    .delete-button {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+    .delete-button {
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        width: 73px;
     }
-    .line{
-        background-color: rgba(238, 238, 238, 0.945);
+
+    .delete-button:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+    .system-button {background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%)}
+    .system-button {
+       text-align: center;
+       text-transform: uppercase;
+       transition: 0.5s;
+       background-size: 200% auto;
+       color: white;            
+       box-shadow: 0 0 20px #eee;
+       border-radius: 10px;
+       width: 124px;
+       height: 27px;
+     }
+
+     .system-button:hover {
+       background-position: right center; /* change the direction of the change here */
+       color: #fff;
+       text-decoration: none;
+     }
+    
+    .todo-line{
+        background: linear-gradient(to right, rgba(211, 204, 227, 0.5),rgba(233, 228, 240, 0.5));
     }
     .statusdone {
         color: green;
     }
     .add {
-        background-color: lightgreen;
+        background: linear-gradient(to right, rgba(17, 153, 142, 0.5), rgba(56, 239, 125, 0.5));
     }
     .delete {
-        background-color: red;
+        background: linear-gradient(to right, rgba(237, 33, 58, 0.5), rgba(147, 41, 30, 0.5));
     }
     .changestatus {
-        background-color: lightsalmon;
+        background: linear-gradient(to right, rgba(253, 200, 48, 0.5), rgba(243, 115, 53, 0.5));
     }
     .filters {
-        background-color: rgb(212, 205, 196);
-    }
-    .log-row {
-        td {
-            border: 5px solid white;
-            border-radius: 14px;
-        }
+        background: linear-gradient(to right, rgba(190, 147, 197, 0.5), rgba(123, 198, 204, 0.5));
     }
 }
 
@@ -106,6 +184,7 @@
     .table-style {
         width: 100%;
         text-align: center;
+        border-collapse: collapse;
         th {
             border-bottom: 3px solid black;
         }
