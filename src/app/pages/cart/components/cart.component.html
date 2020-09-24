@@ -1,27 +1,20 @@
 <!-- <div>on cart page</div> -->
 <div class="main-cart">
-    <span ng-if="vm.cartProducts.length === 0">
-        Your cart is empty
+    <span class="empty" ng-if="vm.cartProducts.length === 0">
+        <div>Cart is empty...</div>
+        <div>Please go to shop and buy somthing</div>
     </span>
     <ol>
-        <li ng-repeat="cartProduct in vm.cartProducts track by $index">
-            <div>
-                <img ng-src="images/{{cartProduct.name}}.png" width="10" height="10" alt="{{product.name}}">
-            </div>
-            <div>
-                {{cartProduct.name}}
-            </div>
-            <div>
+        <li class="product-item" ng-repeat="cartProduct in vm.cartProducts track by $index">
+            <span class="index">{{$index+1}}</span>
+            <img class="product-logo" ng-src="images/{{cartProduct.name}}.png" alt="{{product.name}}">
+            <div class="product-discription">
+                <span>{{cartProduct.name}}</span>
                 <span>Price: {{cartProduct.price | currency: $ }} </span>
-            </div>
-            <div>
                 <span>Count: {{cartProduct.count}}</span>
+                <button class="delete-button" ng-click="vm.deleteFromCart($index)">Delete</button>
             </div>
-            <div>
-                <button ng-click="vm.deleteFromCart($index)">Delete</button>
-            </div>
-            <div>
         </li>
     </ol>
-    <button ng-click="vm.clearCart()">Clear cart</button>
+    <button class="clear-cart-button" ng-click="vm.clearCart()" ng-if="vm.cartProducts.length">Clear cart</button>
 </div>

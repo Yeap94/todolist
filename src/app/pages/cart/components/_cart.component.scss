@@ -4,4 +4,67 @@
     width: 100%;
     padding-top: 40px;
     background-size: cover;
+    color: rgb(224, 85, 220);
+    text-shadow: 1px 1px black;
+    .empty {
+        font-size: 70px;
+        text-align: center;
+    }
+    .product-item {
+        display: inline-flex;
+        width: 95%;
+        padding: 20px;
+        span.index {
+            margin-right: 20px;
+            padding-top: 35px;
+            font-size: 70px;
+        }
+        .product-logo {
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .product-discription {
+            color: chocolate;
+            font-size: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .delete-button {background-image: linear-gradient(to right, white 0%, red  51%, pink  100%)}
+        .delete-button {
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            width: 73px;
+        }
+        .delete-button:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+
+    .clear-cart-button {background-image: linear-gradient(to right, white 0%,  pink  100%)}
+    .clear-cart-button {
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: black;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        width: 150px;
+        margin-left: 110px;
+        height: 32px;
+    }
+    .clear-cart-button:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
 }
