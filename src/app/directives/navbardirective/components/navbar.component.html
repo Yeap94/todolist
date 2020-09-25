@@ -1,7 +1,16 @@
-<div class="buttons-block">
-    <button ng-click="vm.goTodo()" class="btn-grad">ToDo List</button>
-    <button ng-click="vm.goShop()" class="btn-grad">Shop</button>
-    <button ng-if="vm.currentState !== 'homepage'" ng-click="vm.goHome()" class="home-button">Back on Homepage</button>
-    <button ng-if="vm.currentState == 'shop'" ng-click="vm.goCart()" class="btn-grad">Cart</button> 
-    <span ng-if="vm.currentState == 'shop' || vm.currentState == 'cart'">Products in cart: {{vm.RandomService.cartProductsCount}}</div>
+<div class="navbar">
+    <div class="container">
+        <div class="ref">
+            <a ui-sref="homepage">Home</a>
+        </div>
+        <div class="ref">
+            <a ui-sref="todolist">Todo</a>
+        </div>
+        <div class="ref">
+            <a ui-sref="shop">Shop</a>
+        </div>
+        <div class="ref">
+            <a ui-sref="cart">Cart</a>
+        </div>
+    </div>
 </div>
