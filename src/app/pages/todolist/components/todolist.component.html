@@ -1,89 +1,118 @@
-<div class = "main">
-    <div class="default-container">
-        <input type="text" placeholder="New task name" ng-model="vm.newTaskName" maxlength="50" ng-keydown="vm.addNewTask($event)">
-        <button ng-click="vm.addNewTask();" ng-disabled="!vm.newTaskName" class="system-button">Add Task</button>
-        <input type="text" placeholder="Search..." ng-model="vm.taskFilter" maxlength="50">
-        <button ng-click="vm.sortTask('position', true); vm.taskFilter=null" class="system-button">Cancel filters</button>
+<div class = "todolist">
+    <div class="header">
+        <div class="header-item">
+            <input type="text" placeholder="New task name" ng-model="vm.newTaskName" maxlength="50" ng-keydown="vm.addNewTask($event)">
+            <button class="btn btn-add" ng-click="vm.addNewTask();" ng-disabled="!vm.newTaskName">Add Task</button>
+        </div>
+        <div class="header-item">
+            <input type="text" placeholder="Search..." ng-model="vm.taskFilter" maxlength="50">
+            <button class="btn btn-sort" ng-click="vm.sortTask('position', true); vm.taskFilter=null">Cancel filters</button>
+        </div>
     </div>  
-    <div class="task-container">
-        <table class="table-style">
-            <thead class="table-head">
-                <th class="position">
-                    <a href="" ng-click="vm.sortTask('position')">№</a>
-                    <span ng-show="vm.orderByField == 'position'">
-                        <span ng-show="vm.reverseSort">↑</span>
-                        <span ng-show="!vm.reverseSort">↓</span>
-                    </span>
-                </th>
-                <th class="date">
-                    <a href="" ng-click="vm.sortTask('date')">Creation Date</a>
-                    <span ng-show="vm.orderByField == 'date'">
-                        <span ng-show="vm.reverseSort">↑</span>
-                        <span ng-show="!vm.reverseSort">↓</span>
-                    </span>
-                </th>
-                <th class="name-task-todo">
-                    <a href="" ng-click="vm.sortTask('name')">Task Name</a> 
-                    <span ng-show="vm.orderByField == 'name'">
-                        <span ng-show="vm.reverseSort">↑</span>
-                        <span ng-show="!vm.reverseSort">↓</span>
-                    </span>
-                </th>
-                <th class="status">
-                    <a href="" ng-click="vm.sortTask('status')">Status</a>
-                    <span ng-show="vm.orderByField == 'status'">
-                        <span ng-show="vm.reverseSort">↑</span>
-                        <span ng-show="!vm.reverseSort">↓</span>
-                    </span>
-                </th>
-                <th class="action-button">Actions</th>
+    <div class="head-container">
+        <table class="table-todo">
+            <thead>
+                <tr>
+                    <th class="col-1">
+                        <a href="" ng-click="vm.sortTask('position')">№</a>
+                        <span ng-show="vm.orderByField == 'position'">
+                            <span ng-show="vm.reverseSort">↑</span>
+                            <span ng-show="!vm.reverseSort">↓</span>
+                        </span>
+                    </th>
+                    <th class="col-2">
+                        <a href="" ng-click="vm.sortTask('date')">Creation Date</a>
+                        <span ng-show="vm.orderByField == 'date'">
+                            <span ng-show="vm.reverseSort">↑</span>
+                            <span ng-show="!vm.reverseSort">↓</span>
+                        </span>
+                    </th>
+                    <th class="col-3">
+                        <a href="" ng-click="vm.sortTask('name')">Task Name</a> 
+                        <span ng-show="vm.orderByField == 'name'">
+                            <span ng-show="vm.reverseSort">↑</span>
+                            <span ng-show="!vm.reverseSort">↓</span>
+                        </span>
+                    </th>
+                    <th class="col-4">
+                        <a href="" ng-click="vm.sortTask('status')">Status</a>
+                        <span ng-show="vm.orderByField == 'status'">
+                            <span ng-show="vm.reverseSort">↑</span>
+                            <span ng-show="!vm.reverseSort">↓</span>
+                        </span>
+                    </th>
+                    <th class="col-5">
+                        Actions
+                    </th>
+                </tr>
             </thead>
-            <tbody>
+        </table>
+    </div>
+    <div class="body-container">
+        <table class="table-todo">
+            <tbody class="todo-body">
                 <tr ng-repeat="task in vm.todoList | filter: vm.taskFilter | orderBy:vm.orderByField:vm.reverseSort track by $index" 
                     ng-class="{statusdone: task.status}"
                     class="todo-line">
-                    <td>{{task.position}}</td>
-                    <td>{{task.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
-                    <td>
+                    <td class="col-1">{{task.position}}</td>
+                    <td class="col-2">{{task.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
+                    <td class="col-3">
                         <div>{{task.name}}</div>
                     </td>
-                    <td>
+                    <td class="col-4">
                         <input type="checkbox" ng-model="task.status" ng-click="vm.changeTaskStatus(task)">
                     </td>
-                    <td>
-                        <button ng-click="vm.changeTaskStatus(task)" ng-if="!task.status" class="done-button">Done</button>
-                        <button ng-click="vm.changeTaskStatus(task)" ng-if="task.status" class="undone-button">Undone</button>
-                        <button ng-click="vm.deleteTask($index)" class="delete-button">Delete</button>
+                    <td class="col-5">
+                        <div class="buttons">
+                            <button class="btn btn-done"
+                                    ng-click="vm.changeTaskStatus(task)"
+                                    ng-if="!task.status">
+                                    Done
+                            </button>
+                            <button class="btn btn-undone"
+                                    ng-click="vm.changeTaskStatus(task)"
+                                    ng-if="task.status">
+                                    Undone
+                            </button>
+                            <button class="btn btn-delete"
+                                    ng-click="vm.deleteTask($index)">
+                                    Delete
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="task-container">
-        <table class="table-style">
-            <thead class="table-head">
-                <th class="position">№</th>
-                <th class="date">Action Date</th>
-                <th class="name-task-log">Task Name</th>
-                <th class="action-log">Action</th>
+    <div class="head-log-container">
+        <table class="table-log" ng-class="{'table-log-scroll': (vm.logTask | filter:vm.taskFilter).length >=4 }">
+            <thead>
+                <th class="col-log-1">№</th>
+                <th class="col-log-2">Action Date</th>
+                <th class="col-log-3">Task Name</th>
+                <th class="col-log-4">Action</th>
             </thead>
-            <tbody>
+        </table>
+    </div>
+    <div class="body-log-container">
+        <table class="table-log">
+            <tbody class="log-body">
                 <tr ng-repeat="log in vm.logTask | filter: vm.taskFilter track by $index" 
                     ng-class="{add: log.importance == 'add', 
                                 delete: log.importance == 'delete', 
                                 changestatus: log.importance == 'changestatus', 
                                 filters: log.importance == 'filters'}">
-                    <td>{{$index+1}}</td>
-                    <td>{{log.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
-                    <td>
+                    <td class="col-log-1">{{$index+1}}</td>
+                    <td class="col-log-2">{{log.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
+                    <td class="col-log-3">
                         <div>{{log.name}}</div>
                     </td>
-                    <td>{{log.action}}</td>
+                    <td class="col-log-4">{{log.action}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="default-container">
-        <button ng-click="vm.clearLog()" class="system-button">Clear Log</button>
+    <div class="footer">
+        <button ng-click="vm.clearLog()" class="btn btn-cancel-filters">Clear Log</button>
     </div>    
 </div>

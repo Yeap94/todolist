@@ -1,7 +1,7 @@
 import * as angular from 'angular';
 import { Root } from './components/root.component';
 import { routing } from './core.routes';
-import { configLocation, configRoot } from './core.configuration';
+import { configLocation } from './core.configuration';
 
 export const moduleName =
   angular
@@ -14,7 +14,6 @@ export const moduleName =
      * Register Module Config
      */
     .config(configLocation)
-    .config(configRoot)
     /**
      * Register Module Routing
      */

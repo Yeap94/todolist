@@ -1,51 +1,34 @@
-
-.buttons-block {
-    background: linear-gradient(to left, rgba(44, 62, 80, 0.7), rgba(189, 195, 199, 0.7));
-    position: absolute;
-    width: 100%;
-    span {
-        position: fixed;
-        top: 10px;
-        left: 400px;
+.navbar {
+  background: linear-gradient(to left, rgba(44, 62, 80, 0.7), rgba(189, 195, 199, 0.7));
+  position: fixed;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  .container {
+    display: flex;
+    .ref {
+      font-size: 24px;
+      text-align: center;
+      padding: 15px 0;
+      a {
+        text-decoration: unset;
+        margin: 0 15px;
+      }
     }
-    .btn-grad {background-image: linear-gradient(to right, #003973 0%, #E5E5BE  51%, #003973  100%)}
-    .btn-grad {
-       margin: 10px;
-       text-align: center;
-       text-transform: uppercase;
-       transition: 0.5s;
-       background-size: 200% auto;
-       color: white;            
-       box-shadow: 0 0 20px #eee;
-       border-radius: 10px;
-       height: 25px;
-       width: 101px;
-     }
-
-     .btn-grad:hover {
-       background-position: right center; /* change the direction of the change here */
-       color: #fff;
-       text-decoration: none;
-     }    
-    .home-button {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
-    .home-button {
-        margin: 10px;
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;            
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
-        float: right;
-        height: 25px;
-        width: 200px;
-        }
-
-        .home-button:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: #fff;
-        text-decoration: none;
-        }
-    
+    .ref:first-child {
+      a {
+        margin-left: 25px;
+      }
+    }
+    .ref:hover  {
+      transition: 1s;
+      background-color: violet;
+      a {
+        color: blueviolet;
+        letter-spacing: 2px;
+        transition: 1s;
+      }
+    }
+  }
 }
