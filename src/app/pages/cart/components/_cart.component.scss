@@ -6,74 +6,50 @@
     background-size: cover;
     color: rgb(224, 85, 220);
     text-shadow: 1px 1px black;
-    .cart-container {
-        max-height: 800px;
-        overflow-y: auto;
-    }
+    background-position: bottom right;
+    background-repeat: no-repeat;
+     .cart-container {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            overflow-y: auto;
+            max-height: 83vh;
+            .product-item {
+                display: inline-flex;
+                width: 95%;
+                padding: 20px;
+                background: rgba(240, 248, 255, 0.39);
+                border-radius: 50px;
+                margin: 10px;
+                span.index {
+                    margin-right: 20px;
+                    padding-top: 0;
+                    font-size: 20px;
+                }
+                .product-discription {
+                    color: chocolate;
+                    font-size: 32px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    padding-top: 15px;
+                    padding-left: 50px;
+                }
+            }
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            display: inline-flex;
+            .totals {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+        }
     .empty {
         font-size: 70px;
         text-align: center;
-    }
-    .product-item {
-        display: inline-flex;
-        width: 95%;
-        padding: 20px;
-        span.index {
-            margin-right: 20px;
-            padding-top: 35px;
-            font-size: 70px;
-        }
-        .product-logo {
-            width: 150px;
-            height: 150px;
-            margin-right: 20px;
-        }
-        .product-discription {
-            color: chocolate;
-            font-size: 32px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .delete-button {background-image: linear-gradient(to right, white 0%, red  51%, pink  100%)}
-        .delete-button {
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            width: 73px;
-        }
-        .delete-button:hover {
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-        }
-    }
-
-    .clear-cart-button {background-image: linear-gradient(to right, white 0%,  pink  100%)}
-    .clear-cart-button {
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: black;            
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
-        width: 150px;
-        margin-left: 110px;
-        height: 32px;
-        margin-bottom: 20px;
-    }
-    .clear-cart-button:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: #fff;
-        text-decoration: none;
-    }
-    .footer {
-        position: fixed;
-        bottom: 0;
+        margin: 50px;
     }
 }

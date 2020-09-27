@@ -6,7 +6,6 @@
     background-size: cover;
     background-attachment: fixed;
     .product-container {
-        border: 1px solid black;
         margin: 27px;
         margin-top: 40px;
         display: inline-flex;
@@ -18,37 +17,9 @@
             margin: 10px;
             padding: 10px;
             padding-inline: 20px;
-            img {
-                width: 100px; 
-                height: 100px;
-                &.Aston.martin,
-                &.Alfa.romeo,
-                &.Acura,
-                &.Audi.a6,
-                &.Ceed,
-                &.Cube,
-                &.GTR,
-                &.Lambo,
-                &.Mazda,
-                &.Qashqai,
-                &.Sorento,
-                &.Stinger,
-                &.Vaz,
-                &.Vesta,
-                &.Conor,
-                &.Dumplings,
-                &.Candy,
-                &.Chainsaw {
-                    width: 200px;
-                }
-                &.Fried.chicken,
-                &.King.chair,
-                &.Whiskey,
-                &.Taburet,
-                &.Samovar {
-                    width: 80px;
-                }
-            }
+            background: rgba(255, 228, 196, 0.082);
+            border-radius: 50px;
+            
             &:hover {
                 background-color: rgba(141, 149, 156, 0.5);;
                 transition: 0.3s;
@@ -58,26 +29,18 @@
             }
             div {
                 margin:5px;
-                font-size: 15px;
+                font-size: 18px;
             }
             &-description {
                 width: 200px;
-                font-size: 10px !important;
+                font-size: 14px !important;
+            }
+            &.discount {
+                color:rgb(34, 23, 99);
+                transition: .3s;
+                background-color: rgba(172, 255, 47, 0.589);
+                text-shadow: 1px 1px wheat;
             }
         }
     }
 }
-
-
-
-// .add-button {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
-// .add-button {
-//     font-size: 20px;
-//     padding: 7px 25px;
-//     }
-
-//     .add-button:hover {
-//     background-position: right center; /* change the direction of the change here */
-//     color: #fff;
-//     text-decoration: none;
-// }

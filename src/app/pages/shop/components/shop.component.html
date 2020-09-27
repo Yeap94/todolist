@@ -1,6 +1,6 @@
 <div class="shop-main">
    <div class="product-container">
-       <div ng-repeat="product in vm.allProducts track by $index" class="product-item">
+       <div ng-repeat="product in vm.allProducts track by $index" class="product-item" ng-class="{'discount': product.priceChanged}">
             <h2>
                 {{product.name}}
             </h2>
@@ -8,7 +8,7 @@
                 <img class="{{product.name}}" ng-src="images/{{product.name}}.png" alt="{{product.name}}">
             </div>
             <div>
-                <span >Price: {{product.discountPrice | currency: $ }} </span>
+                <span>Price: {{product.discountPrice | currency: $ }} </span>
             </div>
             <div class="product-item-description">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro quas rem molestiae officia maiores doloribus nam?

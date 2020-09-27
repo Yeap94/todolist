@@ -6,19 +6,34 @@ import { RandomizerService } from './../../../services/randomizer.service';
 
 class CartController {
     private cartProducts: Array<ICartProduct> = cartProducts;
-    constructor (
-        private RandomService: RandomizerService
-    ) {
+    private totalPrice: number = 0;
+    private totalCount: number = 0;
+
+    constructor () {
+        this.calcTotals();
     }
 
     public deleteFromCart = (index: number) => {
         this.cartProducts.splice(index, 1);
-        this.RandomService.calcCartCount();
+        this.calcTotals();
     }
 
     public clearCart = () => {
         this.cartProducts.splice(0, this.cartProducts.length);
-        this.RandomService.getcalcCartCount();
+        this.calcTotals();
+    }
+
+    public calcTotals = (): void => {
+        this.totalCount = this.calcTotalCount();
+        this.totalPrice = this.calcTotalPrice();
+    }
+
+    public calcTotalCount = (): number => {
+        return _.reduce(this.cartProducts, (count: number, product: ICartProduct) => count + product.count, 0);
+    }
+
+    public calcTotalPrice = (): number => {
+        return _.reduce(this.cartProducts, (price: number, product: ICartProduct) => price + product.price, 0);
     }
 }
 

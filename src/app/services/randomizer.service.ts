@@ -41,11 +41,4 @@ export class RandomizerService {
     public getIsRandomizeStart = (): boolean => {
         return this.isRandomizeStart;
     }
-    public calcCartCount = (): void => {
-        this.cartProductsCount = _.reduce(this.cartProducts, (count: number, product: ICartProduct) => count + product.count, 0);
-    }
-    public getcalcCartCount = (): number => {
-        this.cartProductsCount = 0;
-        return this.cartProductsCount;
-    }
 }

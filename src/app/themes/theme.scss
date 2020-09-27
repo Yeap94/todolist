@@ -18,6 +18,38 @@ body {
 
     font-family: 'Roboto', sans-serif;
 
+    img {
+        width: 200px; 
+        height: 200px;
+       /*  &.Aston.martin,
+        &.Alfa.romeo,
+        &.Acura,
+        &.Audi.a6,
+        &.Ceed,
+        &.Cube,
+        &.GTR,
+        &.Lambo,
+        &.Mazda,
+        &.Qashqai,
+        &.Sorento,
+        &.Stinger,
+        &.Vaz,
+        &.Vesta,
+        &.Conor,
+        &.Dumplings,
+        &.Candy,
+        &.Chainsaw {
+            width: 200px;
+        } */
+        &.Fried.chicken,
+        &.King.chair,
+        &.Whiskey,
+        &.Taburet,
+        &.Samovar {
+            width: 150px;
+        }
+    }
+
     .btn {
         margin: 10px;
         padding: 13px 5px;
@@ -55,19 +87,36 @@ body {
             width: 80px;
             background-image: linear-gradient(to right, rgb(236, 111, 102) 0%, rgb(243, 161, 131) 51%, rgb(236, 111, 102) 100%);
         }
-        &:hover {
-            background-position: 100%;
-            color: #fff;
-            text-decoration: none;
-        }
         &.btn-cancel-filters {
             width: 140px;
             background-image: linear-gradient(to right, #FC354C 0%, #0ABFBC  51%, #FC354C  100%);
         }
         &.btn-add-to-cart {
-            background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%);
-            font-size: 20px;
+            background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);
+            font-size: 15px;
             padding: 7px 25px;
+            
+        }
+        &.btn-delete-cart {
+            margin: 0;
+            margin-top: 15px;
+            font-size: 20px;
+            width: 150px;
+            background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+            &:hover {
+                letter-spacing: 2px;
+            }
+        }
+        &.clear-cart-button{
+            background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4  51%, #E55D87  100%);
+            margin-left: 110px;
+            width: 170px;
+            
+        }
+        &:hover {
+            background-position: 100%;
+            color: #fff;
+            text-decoration: none;
         }
     }
 }

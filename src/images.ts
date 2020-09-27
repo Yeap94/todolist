@@ -40,6 +40,8 @@ require('./app/themes/images/Goat.png');
 require('./app/themes/images/Samovar.png');
 require('./app/themes/images/Whiskey.png');
 require('./app/themes/images/Fried chicken.png');
+require('./app/themes/images/Vesta White.png');
+require('./app/themes/images/Vesta Grey.png');
 
 require('./app/themes/images/homebckg.jpg');
 require('./app/themes/images/todobckg.jpg');
