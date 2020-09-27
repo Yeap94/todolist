@@ -1,22 +1,21 @@
 <div class="shop-main">
-   <div>
-    <ol>
-        <li ng-repeat="product in vm.allProducts track by $index" class="product-item">
-            <div>
-                <img ng-src="images/{{product.name}}.png" width="100" height="100" alt="{{product.name}}">
-            </div>
-            <div>
+   <div class="product-container">
+       <div ng-repeat="product in vm.allProducts track by $index" class="product-item">
+            <h2>
                 {{product.name}}
+            </h2>
+            <div>
+                <img class="{{product.name}}" ng-src="images/{{product.name}}.png" alt="{{product.name}}">
             </div>
             <div>
-                <!-- <span ng-if="!product.priceChanged">Price: {{product.price | currency: $ }} </span> -->
                 <span >Price: {{product.discountPrice | currency: $ }} </span>
             </div>
-            <div>
-                <button ng-click="vm.addToCart($index)" class="add-button">Add to cart</button>
+            <div class="product-item-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro quas rem molestiae officia maiores doloribus nam?
             </div>
-        </li>
-    </ol>
+            <div>
+                <button ng-click="vm.addToCart($index)" class="btn btn-add-to-cart">Add to cart</button>
+            </div>
+       </div>
    </div>
 </div>
-

@@ -1,35 +1,83 @@
-.product-item {
-    
-    width: 150px;
-    height: 170px;
-    display: inline-block;
-}
-.product-item:hover {
-    background-color: rgba(141, 149, 156, 0.5);;
-    transition: 0.3s;
-}
 .shop-main {
     background-image: url(./images/shopbckg.jpg);
-    height: 100%;
+    height: auto;
     width: 100%;
     padding-top: 40px;
     background-size: cover;
-}
-
-.add-button {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
-.add-button {
-    padding: 3px;
-    text-align: center;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;            
-    box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
-    width: 110px;
+    background-attachment: fixed;
+    .product-container {
+        border: 1px solid black;
+        margin: 27px;
+        margin-top: 40px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            padding: 10px;
+            padding-inline: 20px;
+            img {
+                width: 100px; 
+                height: 100px;
+                &.Aston.martin,
+                &.Alfa.romeo,
+                &.Acura,
+                &.Audi.a6,
+                &.Ceed,
+                &.Cube,
+                &.GTR,
+                &.Lambo,
+                &.Mazda,
+                &.Qashqai,
+                &.Sorento,
+                &.Stinger,
+                &.Vaz,
+                &.Vesta,
+                &.Conor,
+                &.Dumplings,
+                &.Candy,
+                &.Chainsaw {
+                    width: 200px;
+                }
+                &.Fried.chicken,
+                &.King.chair,
+                &.Whiskey,
+                &.Taburet,
+                &.Samovar {
+                    width: 80px;
+                }
+            }
+            &:hover {
+                background-color: rgba(141, 149, 156, 0.5);;
+                transition: 0.3s;
+            }
+            div,h2 {
+                text-align: center;
+            }
+            div {
+                margin:5px;
+                font-size: 15px;
+            }
+            &-description {
+                width: 200px;
+                font-size: 10px !important;
+            }
+        }
     }
-
-    .add-button:hover {
-    background-position: right center; /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
 }
+
+
+
+// .add-button {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
+// .add-button {
+//     font-size: 20px;
+//     padding: 7px 25px;
+//     }
+
+//     .add-button:hover {
+//     background-position: right center; /* change the direction of the change here */
+//     color: #fff;
+//     text-decoration: none;
+// }

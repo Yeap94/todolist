@@ -62,7 +62,12 @@ body {
         }
         &.btn-cancel-filters {
             width: 140px;
-            background-image: linear-gradient(to right, #FC354C 0%, #0ABFBC  51%, #FC354C  100%)
+            background-image: linear-gradient(to right, #FC354C 0%, #0ABFBC  51%, #FC354C  100%);
+        }
+        &.btn-add-to-cart {
+            background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%);
+            font-size: 20px;
+            padding: 7px 25px;
         }
     }
 }
