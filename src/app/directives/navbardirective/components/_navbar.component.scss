@@ -1,5 +1,6 @@
 .navbar {
-  background: linear-gradient(to left, rgba(44, 62, 80, 0.7), rgba(189, 195, 199, 0.7));
+  // background: linear-gradient(to left, rgba(44, 62, 80, 0.7), rgba(189, 195, 199, 0.7));
+  background: linear-gradient(to bottom right, #A8CABAb4, #5D4157b4);
   position: fixed;
   top: 0;
   padding: 0;
@@ -10,24 +11,19 @@
     .ref {
       font-size: 24px;
       text-align: center;
-      padding: 15px 0;
+      padding: 15px 15px;
       a {
         text-decoration: unset;
         margin: 0 15px;
-      }
-    }
-    .ref:first-child {
-      a {
-        margin-left: 25px;
+        color: wheat;
+        text-shadow: 1px 1px grey;
       }
     }
     .ref:hover  {
       transition: 1s;
-      background-color: violet;
+      background: linear-gradient(to bottom, #ad5389aa, #3b1053aa);
       a {
-        color: blueviolet;
-        letter-spacing: 2px;
-        transition: 1s;
+        transition: .9s;
       }
     }
   }

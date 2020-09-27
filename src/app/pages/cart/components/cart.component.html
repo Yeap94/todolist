@@ -1,24 +1,26 @@
 <!-- <div>on cart page</div> -->
 <div class="main-cart">
-    <span class="empty" ng-if="vm.cartProducts.length === 0">
+    <span class="empty" ng-if="!vm.cartProducts.length">
         <div>Cart is empty...</div>
         <div>Please go to shop and buy somthing</div>
     </span>
-    <div ng-if="vm.cartProducts.length">
-        <ol class="cart-container">
-            <li class="product-item" ng-repeat="cartProduct in vm.cartProducts track by $index">
-                <span class="index">{{$index+1}}</span>
-                <img class="product-logo" ng-src="images/{{cartProduct.name}}.png" alt="{{product.name}}">
-                <div class="product-discription">
-                    <span>{{cartProduct.name}}</span>
-                    <span>Price: {{cartProduct.price | currency: $ }} </span>
-                    <span>Count: {{cartProduct.count}}</span>
-                    <button class="delete-button" ng-click="vm.deleteFromCart($index)">Delete</button>
-                </div>
-            </li>
-        </ol>
+    <div ng-if="vm.cartProducts.length" class="cart-container">
+        <div class="product-item" ng-repeat="cartProduct in vm.cartProducts track by $index">
+            <span class="index">{{$index+1}}</span>
+            <img class="{{cartProduct.name}}" ng-src="images/{{cartProduct.name}}.png" alt="{{product.name}}">
+            <div class="product-discription">
+                <span>{{cartProduct.name}}</span>
+                <span>Price: {{cartProduct.price | currency: $ }} </span>
+                <span>Count: {{cartProduct.count}}</span>
+                <button class="btn btn-delete-cart" ng-click="vm.deleteFromCart($index)">Delete</button>
+            </div>
+        </div>
     </div>
-    <div class="footer">
-        <button class="clear-cart-button" ng-click="vm.clearCart()" ng-if="vm.cartProducts.length">Clear cart</button>
+    <div class="footer" ng-if="vm.cartProducts.length">
+        <button class="btn clear-cart-button" ng-click="vm.clearCart()">Clear cart</button>
+        <div class="totals">
+            <span>Total count of products: {{vm.totalCount}}</span>
+            <span>Total price: {{vm.totalPrice | currency: $}}</span>
+        </div>
     </div>
 </div>

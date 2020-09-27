@@ -42,7 +42,7 @@
             .col-4   { width: 10%;  }
             .col-5   { width: 15%;  }
             tr {
-                th, td {
+                th {
                     display: block;
                     float: left;
                     padding: 20px 10px;
@@ -78,11 +78,16 @@
                 .col-5   { width: 15%; }
                 tr {
                     display: flex;
-                    th, td {
+                    td {
                         padding: 20px 10px;
                         white-space: nowrap;
                         text-overflow: ellipsis;
                         overflow: hidden;
+                        div {
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                        }
                     }
                 }
             }
@@ -102,7 +107,7 @@
             .col-log-3 { width: 60%;   }
             .col-log-4 { width: 20%;   }
             tr {
-                th, td {
+                th {
                     display: block;
                     float: left;
                     padding: 20px 10px;
@@ -138,7 +143,7 @@
                 .col-log-4 { width: 20%; }
                 tr {
                     display: flex;
-                    th, td {
+                    td {
                         padding: 20px 10px;
                         white-space: nowrap;
                         text-overflow: ellipsis;
