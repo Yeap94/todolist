@@ -41,6 +41,21 @@
                 background-color: rgba(172, 255, 47, 0.589);
                 text-shadow: 1px 1px wheat;
             }
+            &.is-added {
+                background: linear-gradient(to left, #43c6ac, #f8ffae);
+                color: #e44848;
+                font-size:  15px;
+                padding: 7px 20px;
+                text-transform: uppercase;
+                margin: 5px auto;
+                border-radius: 10px;
+                box-shadow: 0 0 20px #eee;
+                border-radius: 10px;
+                outline: none;
+                border-width: 0;
+                border-style: solid;
+                border-color: #e2e8f0;
+            }
         }
     }
 }

@@ -14,8 +14,9 @@
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro quas rem molestiae officia maiores doloribus nam?
             </div>
             <div>
-                <button ng-click="vm.addToCart($index)" class="btn btn-add-to-cart">Add to cart</button>
+                <button ng-click="vm.addToCart($index)" class="btn btn-add-to-cart" ng-if="!product.added">Add to cart</button>
             </div>
+            <div class="product-item is-added" ng-if="product.added">Added in cart</div>
        </div>
    </div>
 </div>
