@@ -1,0 +1,6 @@
+<div class="min-item" ng-repeat="min in vm.FindMinimalPriceService.minimalPrices track by $index">
+    <div ng-bind="$index+1"></div>
+    <div ng-bind="min.name"></div>
+    <div ng-bind="min.price"></div>
+    <div ng-bind="min.date.format('HH:mm:ss')"></div>
+</div>

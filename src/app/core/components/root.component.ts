@@ -1,11 +1,21 @@
+import * as angular from 'angular';
 import { RandomizerService } from './../../services/randomizer.service';
+import { CalcTotalService } from './../../services/calctotal.service';
+import { FindMinimalPriceService } from './../../services/findminimal.service';
+import { ShopController } from './../../pages/shop/components/shop.component';
+
 
 class RootController {
 
     constructor(
-        private RandomService: RandomizerService
+        private RandomService: RandomizerService,
+        private $rootScope: ng.IRootScopeService,
+        private CalcTotalService: CalcTotalService,
+        private FindMinimalPriceService: FindMinimalPriceService,
+        private $timeout: ng.ITimeoutService
     ) {
-
+        let a = new ShopController(this.$rootScope, this.RandomService, this.CalcTotalService, this.FindMinimalPriceService, this.$timeout);
+        a.init();
     }
 }
 

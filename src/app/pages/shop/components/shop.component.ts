@@ -6,6 +6,7 @@ import { RandomizerService } from './../../../services/randomizer.service';
 import { products } from './products';
 import { cartProducts } from './../../cart/components/cartproucts';
 import { CalcTotalService } from './../../../services/calctotal.service';
+import { FindMinimalPriceService } from './../../../services/findminimal.service';
 
 
 export class ShopController {
@@ -16,17 +17,26 @@ export class ShopController {
     private timeout: angular.IPromise<void>;
 
     constructor (
-        private $scope: ng.IScope,
+        private $rootScope: ng.IRootScopeService,
         private RandomService: RandomizerService,
         private CalcTotalService: CalcTotalService,
+        private FindMinimalPriceService: FindMinimalPriceService,
         private $timeout: ng.ITimeoutService
     ) {
-        this.$scope.$watch(() => this.RandomService.getRandomIndex(),
+
+    }
+
+    public init = (): void => {
+        let counter = 0;
+        console.log('init in ctrl');
+        this.$rootScope.$watch(() => this.RandomService.getRandomIndex(),
             (newValue: number, oldValue: number) => {
+                counter++;
+                console.log(counter);
                 this.randomIndex = newValue;
             }
         );
-        this.$scope.$watch(() => this.RandomService.getRandomDiscount(),
+        this.$rootScope.$watch(() => this.RandomService.getRandomDiscount(),
             (newValue: number, oldValue: number) => {
                 _.forEach(this.allProducts, (product: IProduct) => {
                     product.priceChanged = false;
@@ -35,10 +45,12 @@ export class ShopController {
                 if (this.randomIndex !== undefined) {
                     this.allProducts[this.randomIndex].priceChanged = true;
                     this.allProducts[this.randomIndex].discountPrice = this.allProducts[this.randomIndex].price * newValue;
+                    this.FindMinimalPriceService.compare(this.allProducts[this.randomIndex]);
                 }
             }
         );
     }
+
     public addToCart = (index: number) => {
         this.beautify(index);
         let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === this.allProducts[index].name);
