@@ -5,8 +5,8 @@
                 <div class="in-cart">
                     In cart
                 </div>
-                <div class="count">
-                    
+                <div class="count" id="counter-{{$index}}">
+                    {{vm.CalcTotalService.getProductCount(product.name)}}
                 </div>
             </div>
             <h2>

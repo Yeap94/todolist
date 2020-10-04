@@ -66,6 +66,7 @@
                 position: relative;
                 margin-bottom: -95px;
                 top: -15px;
+                transition: .5s;
                 
                 .in-cart {
                     position: relative;
@@ -82,6 +83,10 @@
                     left: -54px;
                     white-space: nowrap;
                     font-size: 20px;
+                    transition: .5s;
+                    &.time {
+                        font-size: 28px !important;
+                    }
                 }
             }
         }

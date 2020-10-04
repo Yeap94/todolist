@@ -11,6 +11,7 @@ import { moduleName as cartModule } from './pages/cart/cart.module';
  * Import Application Services
  */
 import { RandomizerService } from './services/randomizer.service';
+import { CalcTotalService } from './services/CalcTotal.service';
 /**
  * Import Application Directives
  */
@@ -25,5 +26,6 @@ export const moduleName =
     cartModule
   ])
   .service(RandomizerService.selector, RandomizerService)
+  .service(CalcTotalService.selector, CalcTotalService)
   .directive(selector, NavbarDirective)
   .name;

@@ -14,7 +14,6 @@ export class RandomizerService {
         private $interval: ng.IIntervalService,
     ) {
         this.randomize();
-        console.log ('Random start');
     }
 
     public randomize = (): void => {
