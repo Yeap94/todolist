@@ -1,7 +1,5 @@
 import * as _ from 'underscore';
 import { products } from './../pages/shop/components/products';
-import { cartProducts } from './../pages/cart/components/cartproucts';
-import { ICartProduct } from './../models/cartproduct.interface';
 
 export class RandomizerService {
 
@@ -10,14 +8,13 @@ export class RandomizerService {
     private randomDiscount: number;
     private isRandomizeStart: boolean = false;
     private productsLength: number = products.length;
-    private cartProductsCount: number = 0;
-    private cartProducts: Array<ICartProduct> = cartProducts;
 
 
     constructor (
         private $interval: ng.IIntervalService,
     ) {
         this.randomize();
+        console.log ('Random start');
     }
 
     public randomize = (): void => {

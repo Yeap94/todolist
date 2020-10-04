@@ -2,7 +2,6 @@ import * as angular from 'angular';
 import * as _ from 'underscore';
 import { ICartProduct } from './../../../models/cartproduct.interface';
 import { cartProducts } from './../../cart/components/cartproucts';
-import { RandomizerService } from './../../../services/randomizer.service';
 
 class CartController {
     private cartProducts: Array<ICartProduct> = cartProducts;

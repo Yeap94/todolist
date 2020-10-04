@@ -15,7 +15,6 @@ export class ShopController {
     constructor (
         private $scope: ng.IScope,
         private RandomService: RandomizerService,
-        private $timeout: ng.ITimeoutService
     ) {
         this.$scope.$watch(() => this.RandomService.getRandomIndex(),
             (newValue: number, oldValue: number) => {
@@ -49,11 +48,6 @@ export class ShopController {
             });
         }
         this.allProducts[index].added = true;
-        this.$timeout(() => {
-            this.allProducts[index].added = false;
-            console.log ('vm.notification in timeout: ', this.allProducts[index].added);
-        }, 1000);
-        console.log ('vm.notification: ', this.allProducts[index].added);
     }
 }
 

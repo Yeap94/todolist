@@ -27,6 +27,7 @@
             div,h2 {
                 text-align: center;
             }
+            h2 { z-index: 2;}
             div {
                 margin:5px;
                 font-size: 18px;
@@ -55,6 +56,33 @@
                 border-width: 0;
                 border-style: solid;
                 border-color: #e2e8f0;
+            }
+            .add-test {
+                width: 0; 
+                height: 0;
+                border-top: 90px solid #2cd69e;
+                border-left: 90px solid transparent;
+                left: 135px;
+                position: relative;
+                margin-bottom: -95px;
+                top: -15px;
+                
+                .in-cart {
+                    position: relative;
+                    rotate: 45deg;
+                    top: -97px;
+                    left: -41px;
+                    white-space: nowrap;
+                    font-size: 15px;
+                }
+                .count {
+                    position: relative;
+                    rotate: 45deg;
+                    top: -111px;
+                    left: -54px;
+                    white-space: nowrap;
+                    font-size: 20px;
+                }
             }
         }
     }
