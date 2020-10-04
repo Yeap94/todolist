@@ -27,6 +27,7 @@
             div,h2 {
                 text-align: center;
             }
+            h2 { z-index: 2;}
             div {
                 margin:5px;
                 font-size: 18px;
@@ -40,6 +41,53 @@
                 transition: .3s;
                 background-color: rgba(172, 255, 47, 0.589);
                 text-shadow: 1px 1px wheat;
+            }
+            &.is-added {
+                background: linear-gradient(to left, #43c6ac, #f8ffae);
+                color: #e44848;
+                font-size:  15px;
+                padding: 7px 20px;
+                text-transform: uppercase;
+                margin: 5px auto;
+                border-radius: 10px;
+                box-shadow: 0 0 20px #eee;
+                border-radius: 10px;
+                outline: none;
+                border-width: 0;
+                border-style: solid;
+                border-color: #e2e8f0;
+            }
+            .add-test {
+                width: 0; 
+                height: 0;
+                border-top: 90px solid #2cd69e;
+                border-left: 90px solid transparent;
+                left: 135px;
+                position: relative;
+                margin-bottom: -95px;
+                top: -15px;
+                transition: .5s;
+                
+                .in-cart {
+                    position: relative;
+                    rotate: 45deg;
+                    top: -97px;
+                    left: -41px;
+                    white-space: nowrap;
+                    font-size: 15px;
+                }
+                .count {
+                    position: relative;
+                    rotate: 45deg;
+                    top: -111px;
+                    left: -54px;
+                    white-space: nowrap;
+                    font-size: 20px;
+                    transition: .5s;
+                    &.time {
+                        font-size: 28px !important;
+                    }
+                }
             }
         }
     }

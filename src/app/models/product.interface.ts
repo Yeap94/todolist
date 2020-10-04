@@ -3,4 +3,5 @@ export interface IProduct {
     price: number;
     discountPrice: number;
     priceChanged:boolean;
+    added:boolean;
 }

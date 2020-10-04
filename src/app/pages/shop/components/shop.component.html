@@ -1,6 +1,14 @@
 <div class="shop-main">
    <div class="product-container">
        <div ng-repeat="product in vm.allProducts track by $index" class="product-item" ng-class="{'discount': product.priceChanged}">
+            <div class="add-test" ng-if="product.added">
+                <div class="in-cart">
+                    In cart
+                </div>
+                <div class="count" id="counter-{{$index}}">
+                    {{vm.CalcTotalService.getProductCount(product.name)}}
+                </div>
+            </div>
             <h2>
                 {{product.name}}
             </h2>

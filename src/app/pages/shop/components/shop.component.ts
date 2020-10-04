@@ -5,16 +5,21 @@ import { IProduct } from './../../../models/product.interface';
 import { RandomizerService } from './../../../services/randomizer.service';
 import { products } from './products';
 import { cartProducts } from './../../cart/components/cartproucts';
+import { CalcTotalService } from './../../../services/calctotal.service';
+
 
 export class ShopController {
 
     private randomIndex: number;
     private allProducts: Array<IProduct> = products;
     private cartProducts: Array<ICartProduct> = cartProducts;
+    private timeout: angular.IPromise<void>;
 
     constructor (
         private $scope: ng.IScope,
-        private RandomService: RandomizerService
+        private RandomService: RandomizerService,
+        private CalcTotalService: CalcTotalService,
+        private $timeout: ng.ITimeoutService
     ) {
         this.$scope.$watch(() => this.RandomService.getRandomIndex(),
             (newValue: number, oldValue: number) => {
@@ -35,6 +40,7 @@ export class ShopController {
         );
     }
     public addToCart = (index: number) => {
+        this.beautify(index);
         let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === this.allProducts[index].name);
         if (productInCart !== undefined) {
             let productInCartIndex = this.cartProducts.indexOf(productInCart);
@@ -47,6 +53,16 @@ export class ShopController {
                 count: 1
             });
         }
+        this.allProducts[index].added = true;
+        this.CalcTotalService.calcTotals();
+    }
+
+    private beautify = (index: number): void => {
+        this.$timeout.cancel(this.timeout);
+        angular.element(document.getElementById(`counter-${index}`)).addClass('time');
+        this.timeout = this.$timeout(() => {
+            angular.element(document.getElementById(`counter-${index}`)).removeClass('time');
+        }, 1000);
     }
 }
 
