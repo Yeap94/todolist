@@ -1,5 +1,4 @@
 .navbar {
-  // background: linear-gradient(to left, rgba(44, 62, 80, 0.7), rgba(189, 195, 199, 0.7));
   background: linear-gradient(to bottom right, #A8CABAb4, #5D4157b4);
   position: fixed;
   top: 0;
@@ -12,19 +11,17 @@
       font-size: 24px;
       text-align: center;
       padding: 15px 15px;
+      transition: 1s;
       a {
         text-decoration: unset;
         margin: 0 15px;
         color: wheat;
         text-shadow: 1px 1px grey;
+        transition: .5s;
       }
-    }
-    .ref:hover  {
-      transition: 1s;
-      background: linear-gradient(to bottom, #ad5389aa, #3b1053aa);
-      a {
-        transition: .9s;
+      &:hover {
+        background: linear-gradient(to bottom, #ad5389aa, #3b1053aa);
       }
-    }
+    } 
   }
 }

@@ -27,12 +27,8 @@ export class ShopController {
     }
 
     public init = (): void => {
-        let counter = 0;
-        console.log('init in ctrl');
         this.$rootScope.$watch(() => this.RandomService.getRandomIndex(),
             (newValue: number, oldValue: number) => {
-                counter++;
-                console.log(counter);
                 this.randomIndex = newValue;
             }
         );

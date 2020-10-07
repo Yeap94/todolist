@@ -1,7 +1,29 @@
-.min-item {
-    display: flex;
-    flex-wrap: wrap;
-    div {
+.main-min {
+    background-image: url(./images/minimalbckg.jpg);
+    background-size: cover;
+    height: 100%;
+    padding: 28vh 14vw 7vh 14vw;
+    .min-container {
         display: inline-flex;
+        overflow-y: auto;
+        max-height: 65vh;
+        flex-wrap: wrap;
+        width: 100%;
+        font-size: calc(.8vh + .8vw);
+        .min-item {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Bangers', cursive;
+            width: 25%;
+            height: 25vh;
+            text-align: center;
+            padding: 2vh 1vw;    
+            img {
+                width: 100%;
+                height: 50%;
+                padding: 0% 27%;
+                margin: 1vh 0;
+            }
+        }
     }
 }

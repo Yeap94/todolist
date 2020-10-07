@@ -4,7 +4,7 @@ import { MinimalPrice } from './components/minimal.component';
 
 export const moduleName =
     angular
-        .module('application.minimal', ['ui.router'])
+        .module('application.minimal', ['ui.router', 'ui.carousel'])
         .component(MinimalPrice.selector, MinimalPrice)
         .config(routing)
         .name;

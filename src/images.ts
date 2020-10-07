@@ -48,3 +48,4 @@ require('./app/themes/images/homebckg.jpg');
 require('./app/themes/images/todobckg.jpg');
 require('./app/themes/images/shopbckg.jpg');
 require('./app/themes/images/cartbckg.jpg');
+require('./app/themes/images/minimalbckg.jpg');

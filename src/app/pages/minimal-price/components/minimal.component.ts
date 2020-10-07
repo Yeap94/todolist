@@ -2,9 +2,8 @@ import { FindMinimalPriceService } from './../../../services/findminimal.service
 
 export class MinimalPriceController {
     constructor(
-        private FindMinimalPriceService: FindMinimalPriceService
+        private FindMinimalPriceService: FindMinimalPriceService,
     ) {
-
     }
 }
 
