@@ -12,7 +12,7 @@ class TodoController {
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
 
-    $onInit = () => {
+    $onInit = (): void => {
         this.todoList.push(
             {
                 position: this.todoList.length + 1,
@@ -26,7 +26,7 @@ class TodoController {
     /**
      * @description добавляет новое задание в список заданий
      */
-    public addNewTask = (event?: any) => {
+    public addNewTask = (event?: any): void => {
         if ((event && event.key === 'Enter' || event === undefined) && this.newTaskName) {
             this.todoList.push({
                 position: this.todoList.length + 1,
@@ -48,7 +48,7 @@ class TodoController {
      * @description изменяет статус задания на done/undone в списке  по кнопке или чекбоксу
      * @param task - задание, элемент массива todoList, для которого изменяется статус done/undone
      */
-    public changeTaskStatus = (task: ITodoItem) => {
+    public changeTaskStatus = (task: ITodoItem): void => {
         task.status = !task.status;
         let changedStatus: string;
         if (task.status) {
@@ -68,7 +68,7 @@ class TodoController {
      * @description удаляет задание из списка
      * @param index - индекс задания, на котором была нажата кнопка Delete
      */
-    public deleteTask = (index: number) => {
+    public deleteTask = (index: number): void => {
         this.logTask.push({
             name: this.todoList[index].name,
             date: moment(),
@@ -83,7 +83,7 @@ class TodoController {
      * @param field поле, по которому происходит сортировка. В разметке при вызове функции sortTask передается название столбца, на котором нужна фильтрация
      * @param clear - необязательный параметр, определяющий, нажата ли кнопка Cancel Filters (если данная кнопка нажала, то функция вызывается с двумя параметрами: position, true)
      */
-    public sortTask = (field: string, clear?: boolean) => {
+    public sortTask = (field: string, clear?: boolean): void => {
         if (clear || !angular.equals(this.orderByField, field)) {
             this.reverseSort = false;
         } else {
@@ -101,7 +101,7 @@ class TodoController {
     /**
      * @description функция очистки лога текущих событий
      */
-    public clearLog = () => {
+    public clearLog = (): void => {
         this.logTask.splice(0, this.logTask.length);
     }
 }
