@@ -1,5 +1,8 @@
 <div class="main-min">
-    <div class="top-min-item">
+    <div class="no-sale" ng-if="!vm.FindMinimalPriceService.topMinimal">
+        Топовых скидок не было уже {{vm.FindMinimalPriceService.counter}} секунд...
+    </div>
+    <div class="top-min-item" ng-if="vm.FindMinimalPriceService.topMinimal">
         <div class="top-min-pic">
             <img ng-src="images/{{vm.FindMinimalPriceService.topMinimal.name}}.png" alt="Picture">
         </div>
