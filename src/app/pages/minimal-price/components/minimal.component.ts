@@ -1,3 +1,4 @@
+import { IMinimal } from '../../../models/minimal.interface';
 import { FindMinimalPriceService } from './../../../services/findminimal.service';
 
 export class MinimalPriceController {

@@ -2,7 +2,23 @@
     background-image: url(./images/minimalbckg.jpg);
     background-size: cover;
     height: 100%;
-    padding: 28vh 14vw 7vh 14vw;
+    padding: 8vh 14vw 7vh 14vw;
+    font-family: 'Bangers', cursive;
+    .top-min-item {
+        display: inline-flex;
+        justify-content: center;
+        width: 100%;
+        .top-min-pic {
+            width: 14vw;
+            height: 20vh;
+        }
+        .top-min-dicription {
+            display: flex;
+            flex-direction: column;
+            font-size: calc(5vw - 5vh);
+            justify-content: center;
+        }
+    }
     .min-container {
         display: inline-flex;
         overflow-y: auto;
@@ -13,7 +29,6 @@
         .min-item {
             display: flex;
             flex-direction: column;
-            font-family: 'Bangers', cursive;
             width: 25%;
             height: 25vh;
             text-align: center;

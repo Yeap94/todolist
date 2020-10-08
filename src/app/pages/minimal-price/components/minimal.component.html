@@ -1,4 +1,14 @@
 <div class="main-min">
+    <div class="top-min-item">
+        <div class="top-min-pic">
+            <img ng-src="images/{{vm.FindMinimalPriceService.topMinimal.name}}.png" alt="Picture">
+        </div>
+        <div class="top-min-dicription">
+            <div ng-bind="vm.FindMinimalPriceService.topMinimal.name"></div>
+            <div ng-bind="vm.FindMinimalPriceService.topMinimal.price | currency: $"></div>
+            <div ng-bind="vm.FindMinimalPriceService.topMinimal.date.format('HH:mm:ss')"></div>
+        </div>
+    </div>
     <div class="min-container">
         <div class="min-item" ng-repeat="min in vm.FindMinimalPriceService.minimalPrices track by $index">
             <div ng-bind="min.name"></div>
