@@ -42,6 +42,7 @@ require('./app/themes/images/Whiskey.png');
 require('./app/themes/images/Fried chicken.png');
 require('./app/themes/images/Vesta White.png');
 require('./app/themes/images/Vesta Grey.png');
+require('./app/themes/images/close.png');
 
 
 require('./app/themes/images/homebckg.jpg');

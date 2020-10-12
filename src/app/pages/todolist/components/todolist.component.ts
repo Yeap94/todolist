@@ -3,15 +3,23 @@ import * as _ from 'underscore';
 import * as moment from 'moment';
 import { ITodoItem } from './../../../models/todoitem.interface';
 import { ILogOfTask } from './../../../models/log.interface';
+import { ModalService } from './../../../services/modal.service';
 
 class TodoController {
 
     private reverseSort: boolean = false;
     private orderByField: string = 'position';
+    private logReverseSort: boolean = true;
+    private logOrderByField: string = 'date';
     private newTaskName: string;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
 
+    constructor(
+        private ModalService: ModalService
+    ) {
+
+    }
     $onInit = (): void => {
         this.todoList.push(
             {

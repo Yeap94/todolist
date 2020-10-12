@@ -1,4 +1,17 @@
-<div class = "todolist">
+<div class="modal" ng-if="vm.ModalService.isModalOpened">
+    <div class="header">
+        <span>Title</span>
+        <img ng-click="vm.ModalService.isModalOpened = false" ng-src="images/close.png">
+    </div>
+    <div class="body">
+        <span>Sample Text</span>
+    </div>
+    <div class="footer">
+        <button ng-click="vm.ModalService.isModalOpened = false">close</button>
+        <button>No</button>
+    </div>
+</div>
+<div class="todolist" ng-class="{'modal-is-opened': vm.ModalService.isModalOpened}">
     <div class="header">
         <div class="header-item">
             <input type="text" placeholder="New task name" ng-model="vm.newTaskName" maxlength="50" ng-keydown="vm.addNewTask($event)">
@@ -7,6 +20,9 @@
         <div class="header-item">
             <input type="text" placeholder="Search..." ng-model="vm.taskFilter" maxlength="50">
             <button class="btn btn-sort" ng-click="vm.sortTask('position', true); vm.taskFilter=null">Cancel filters</button>
+        </div>
+        <div>
+            <button ng-click="vm.ModalService.isModalOpened = true">modal open</button>
         </div>
     </div>  
     <div class="head-container">
@@ -51,7 +67,7 @@
     <div class="body-container">
         <table class="table-todo">
             <tbody class="todo-body">
-                <tr ng-repeat="task in vm.todoList | filter: vm.taskFilter | orderBy:vm.orderByField:vm.reverseSort track by $index" 
+                <tr ng-repeat="task in vm.todoList | filter: {name: vm.taskFilter} | orderBy:vm.orderByField:vm.reverseSort track by $index" 
                     ng-class="{statusdone: task.status}"
                     class="todo-line">
                     <td class="col-1">{{task.position}}</td>
@@ -88,7 +104,11 @@
         <table class="table-log" ng-class="{'table-log-scroll': (vm.logTask | filter:vm.taskFilter).length >=4 }">
             <thead>
                 <th class="col-log-1">№</th>
-                <th class="col-log-2">Action Date</th>
+                <th class="col-log-2">
+                    <a href="" ng-click="vm.logReverseSort = !vm.logReverseSort">Action Date</a>
+                    <span ng-show="vm.logReverseSort">↑</span>
+                    <span ng-show="!vm.logReverseSort">↓</span>
+                </th>
                 <th class="col-log-3">Task Name</th>
                 <th class="col-log-4">Action</th>
             </thead>
@@ -97,12 +117,12 @@
     <div class="body-log-container">
         <table class="table-log">
             <tbody class="log-body">
-                <tr ng-repeat="log in vm.logTask | filter: vm.taskFilter track by $index" 
+                <tr ng-repeat="log in vm.logTask | filter: vm.taskFilter | orderBy:vm.logOrderByField:vm.logReverseSort track by $index" 
                     ng-class="{add: log.importance == 'add', 
                                 delete: log.importance == 'delete', 
                                 changestatus: log.importance == 'changestatus', 
                                 filters: log.importance == 'filters'}">
-                    <td class="col-log-1">{{$index+1}}</td>
+                    <td class="col-log-1">{{vm.logReverseSort ? vm.logTask.length - $index : $index+1}}</td>
                     <td class="col-log-2">{{log.date.format("DD-MM-YYYY HH:mm:ss")}}</td>
                     <td class="col-log-3">
                         <div>{{log.name}}</div>
