@@ -3,7 +3,6 @@ import * as _ from 'underscore';
 import * as moment from 'moment';
 import { ITodoItem } from './../../../models/todoitem.interface';
 import { ILogOfTask } from './../../../models/log.interface';
-import { ModalService } from './../../../services/modal.service';
 
 class TodoController {
 
@@ -12,14 +11,11 @@ class TodoController {
     private logReverseSort: boolean = true;
     private logOrderByField: string = 'date';
     private newTaskName: string;
+    private modalIsOpened = false;
+    private taskIndex: number;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
 
-    constructor(
-        private ModalService: ModalService
-    ) {
-
-    }
     $onInit = (): void => {
         this.todoList.push(
             {
@@ -76,14 +72,20 @@ class TodoController {
      * @description удаляет задание из списка
      * @param index - индекс задания, на котором была нажата кнопка Delete
      */
-    public deleteTask = (index: number): void => {
+    public agreeDeleteTask = (): void => {
         this.logTask.push({
-            name: this.todoList[index].name,
+            name: this.todoList[this.taskIndex].name,
             date: moment(),
             action: 'Delete',
             importance: 'delete'
         });
-        this.todoList.splice(index, 1);
+        this.todoList.splice(this.taskIndex, 1);
+        this.modalIsOpened = false;
+    }
+
+    public deleteTask = (index: number): void => {
+        this.modalIsOpened = true;
+        this.taskIndex = index;
     }
 
     /**

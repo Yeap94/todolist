@@ -5,6 +5,14 @@
     padding-top: 40px;
     background-size: cover;
     background-attachment: fixed;
+    .filter-container {
+        display: inline-flex;
+        padding-top: 40px;
+        padding-left: 70px;
+        .search-for-price {
+            display: inline-flex;
+        }
+    }
     .product-container {
         margin: 27px;
         margin-top: 40px;

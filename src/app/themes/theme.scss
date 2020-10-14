@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap');
 @import './../pages/todolist/components/todolist.component';
 @import './../pages/shop/components/shop.component';
 @import './../directives/navbardirective/components/navbar.component';
@@ -114,6 +115,20 @@ body {
             margin-left: 110px;
             width: 170px;
             
+        }
+        &.confirm-delete {
+            background-image: linear-gradient(to right, #1D976C 0%, #93F9B9  51%, #1D976C  100%);
+            width: 70px;
+            height: 30px;
+            margin: 3px;
+            padding: 3px;
+        }
+        &.cancel-delete {
+            background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%);
+            width: 70px;
+            height: 30px;
+            margin: 3px;
+            padding: 3px;
         }
         &:hover {
             background-position: 100%;

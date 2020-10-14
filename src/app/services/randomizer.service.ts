@@ -22,7 +22,7 @@ export class RandomizerService {
             this.$interval(() => {
                 this.randomIndex = Math.floor(Math.random() * this.productsLength);
                 this.randomDiscount = (Math.floor(Math.random() * 100) + 1) / 100;
-            }, 1000);
+            }, 10000);
         }
     }
 

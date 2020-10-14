@@ -7,12 +7,16 @@ import { products } from './products';
 import { cartProducts } from './../../cart/components/cartproucts';
 import { CalcTotalService } from './../../../services/calctotal.service';
 import { FindMinimalPriceService } from './../../../services/findminimal.service';
+import { min } from 'underscore';
 
 
 export class ShopController {
 
     private randomIndex: number;
     private allProducts: Array<IProduct> = products;
+    private filteredProducts: Array<IProduct> = [];
+    private minPrice: number;
+    private maxPrice: number;
     private cartProducts: Array<ICartProduct> = cartProducts;
     private timeout: angular.IPromise<void>;
 
@@ -71,6 +75,28 @@ export class ShopController {
         this.timeout = this.$timeout(() => {
             angular.element(document.getElementById(`counter-${index}`)).removeClass('time');
         }, 1000);
+    }
+
+    private findProductForPrice = (): void => {
+        this.allProducts = products;
+        this.filteredProducts = [];
+        _.each(this.allProducts, (each: IProduct) => {
+            if (each.price >= this.minPrice && each.price <= this.maxPrice) {
+                this.filteredProducts.push({
+                    name: each.name,
+                    price: each.price,
+                    discountPrice: each.discountPrice,
+                    priceChanged: each.priceChanged,
+                    added: each.added
+                });
+            }
+        });
+        this.allProducts = this.filteredProducts;
+    }
+
+    private cancelFilters = (): void => {
+        this.allProducts = products;
+        this.filteredProducts = [];
     }
 }
 

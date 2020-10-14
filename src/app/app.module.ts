@@ -14,7 +14,6 @@ import { moduleName as minimalModule } from './pages/minimal-price/minimal.modul
 import { RandomizerService } from './services/randomizer.service';
 import { CalcTotalService } from './services/CalcTotal.service';
 import { FindMinimalPriceService } from './services/findminimal.service';
-import { ModalService } from './services/modal.service';
 /**
  * Import Application Directives
  */
@@ -32,6 +31,5 @@ export const moduleName =
   .service(RandomizerService.selector, RandomizerService)
   .service(CalcTotalService.selector, CalcTotalService)
   .service(FindMinimalPriceService.selector, FindMinimalPriceService)
-  .service(ModalService.selector, ModalService)
   .directive(selector, NavbarDirective)
   .name;
