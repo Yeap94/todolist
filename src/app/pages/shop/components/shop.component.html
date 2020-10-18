@@ -1,25 +1,26 @@
 <div class="shop-main">
     <div class="filter-container">
         <div class="search-for-name">
-            <input ng-model="vm.nameOfProductFilter" placeholder="Name of product..." maxlength="50">
+            <input ng-model="vm.shopFilter.name" placeholder="Name of product..." maxlength="50">
         </div>
         <div class="search-for-price">
            <div class="price-diapazone">
                From
-               <input ng-model="vm.minPrice" placeholder="Min price">
+               <input ng-model="vm.shopFilter.minPrice" ng-change="vm.applyFilter()" placeholder="Min price">
                to
-               <input ng-model="vm.maxPrice" placeholder="Max price">
+               <input ng-model="vm.shopFilter.maxPrice" ng-change="vm.applyFilter()" placeholder="Max price">
            </div>
            <div class="is-discount">
                <label for="isdiscount">With discount only</label>
-               <input id="isdiscount" type="checkbox">
+               <input id="isdiscount" type="checkbox" ng-model="vm.shopFilter.isDiscount">
                <button ng-click="vm.findProductForPrice()">Filter</button>
                <button ng-click="vm.cancelFilters()">cancelFilters</button>
            </div>
         </div>
     </div>
    <div class="product-container">
-       <div ng-repeat="product in vm.allProducts | filter: {name:vm.nameOfProductFilter} track by $index" class="product-item" ng-class="{'discount': product.priceChanged}">
+       <div ng-repeat="product in vm.filteredProducts | filter: {name: vm.shopFilter.name, priceChanged: vm.shopFilter.isDiscount ? true : undefined} track by $index"
+            class="product-item" ng-class="{'discount': product.priceChanged}">
             <div class="add-test" ng-if="product.added">
                 <div class="in-cart">
                     In cart

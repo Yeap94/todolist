@@ -6,49 +6,34 @@ import { RandomizerService } from './../../../services/randomizer.service';
 import { products } from './products';
 import { cartProducts } from './../../cart/components/cartproucts';
 import { CalcTotalService } from './../../../services/calctotal.service';
-import { FindMinimalPriceService } from './../../../services/findminimal.service';
-import { min } from 'underscore';
+import { IShopFilter } from '../../../models/shop-filter';
 
 
 export class ShopController {
 
-    private randomIndex: number;
     private allProducts: Array<IProduct> = products;
     private filteredProducts: Array<IProduct> = [];
-    private minPrice: number;
-    private maxPrice: number;
     private cartProducts: Array<ICartProduct> = cartProducts;
-    private timeout: angular.IPromise<void>;
+    private timeout: ng.IPromise<void>;
+    private shopFilter: IShopFilter;
 
     constructor (
-        private $rootScope: ng.IRootScopeService,
+        private $scope: ng.IScope,
         private RandomService: RandomizerService,
         private CalcTotalService: CalcTotalService,
-        private FindMinimalPriceService: FindMinimalPriceService,
         private $timeout: ng.ITimeoutService
     ) {
+        this.filteredProducts = this.allProducts;
+        this.shopFilter = {
+            name: '',
+            minPrice: null,
+            maxPrice: null,
+            isDiscount: false
+        };
 
-    }
-
-    public init = (): void => {
-        this.$rootScope.$watch(() => this.RandomService.getRandomIndex(),
-            (newValue: number, oldValue: number) => {
-                this.randomIndex = newValue;
-            }
-        );
-        this.$rootScope.$watch(() => this.RandomService.getRandomDiscount(),
-            (newValue: number, oldValue: number) => {
-                _.forEach(this.allProducts, (product: IProduct) => {
-                    product.priceChanged = false;
-                    product.discountPrice = product.price;
-                });
-                if (this.randomIndex !== undefined) {
-                    this.allProducts[this.randomIndex].priceChanged = true;
-                    this.allProducts[this.randomIndex].discountPrice = this.allProducts[this.randomIndex].price * newValue;
-                    this.FindMinimalPriceService.compare(this.allProducts[this.randomIndex]);
-                }
-            }
-        );
+        this.$scope.$watch(() => this.RandomService.getIsGoDiscountStart(), (newValue: boolean, oldValue: boolean) => {
+            this.applyFilter();
+        });
     }
 
     public addToCart = (index: number) => {
@@ -77,26 +62,18 @@ export class ShopController {
         }, 1000);
     }
 
-    private findProductForPrice = (): void => {
-        this.allProducts = products;
-        this.filteredProducts = [];
-        _.each(this.allProducts, (each: IProduct) => {
-            if (each.price >= this.minPrice && each.price <= this.maxPrice) {
-                this.filteredProducts.push({
-                    name: each.name,
-                    price: each.price,
-                    discountPrice: each.discountPrice,
-                    priceChanged: each.priceChanged,
-                    added: each.added
-                });
-            }
-        });
-        this.allProducts = this.filteredProducts;
+    private transformPrice = (price: string): string => {
+        return price ? price.replace(/[^0-9]/g, '') : '';
     }
 
-    private cancelFilters = (): void => {
-        this.allProducts = products;
-        this.filteredProducts = [];
+    private applyFilter = () => {
+        this.shopFilter.minPrice = this.transformPrice(this.shopFilter.minPrice);
+        this.shopFilter.maxPrice = this.transformPrice(this.shopFilter.maxPrice);
+        let max = <IProduct>_.max(this.allProducts, (product: IProduct) => product.discountPrice);
+        this.filteredProducts = _.filter(this.allProducts, (product: IProduct) => {
+            return  product.discountPrice >= (+this.shopFilter.minPrice || 0) &&
+                    product.discountPrice <= (+this.shopFilter.maxPrice || max.discountPrice);
+        });
     }
 }
 
