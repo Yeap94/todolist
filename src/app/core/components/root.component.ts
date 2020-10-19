@@ -4,6 +4,9 @@ import { RandomizerService } from './../../services/randomizer.service';
 class RootController {
 
     constructor(
+        /**
+         * @description injection для того, чтобы рандомайер цен запускался вместе с запуском приложения вне зависимости от страницы
+         */
         private RandomService: RandomizerService,
     ) {
     }

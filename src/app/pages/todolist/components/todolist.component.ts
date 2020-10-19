@@ -1,8 +1,8 @@
 import * as angular from 'angular';
 import * as _ from 'underscore';
 import * as moment from 'moment';
-import { ITodoItem } from './../../../models/todoitem.interface';
-import { ILogOfTask } from './../../../models/log.interface';
+import { ITodoItem } from '../../../models/todoitem';
+import { ILogOfTask } from '../../../models/log';
 
 class TodoController {
 
@@ -15,7 +15,9 @@ class TodoController {
     private taskIndex: number;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
-
+    /**
+     * @description на ините в массив добавляется дефолтный элемент
+     */
     $onInit = (): void => {
         this.todoList.push(
             {
@@ -29,8 +31,14 @@ class TodoController {
 
     /**
      * @description добавляет новое задание в список заданий
+     * По клику на кнопу ADD TASK в разметке запускается данная функция
+     * в функцию передается событие. Далее выполняется проверка на приход этого события
+     * Если событие пришло И нажата клавиша Enter (property event.key есть в event, которое приходит) ИЛИ событие не пришло, НО при этом имя было введено,
+     * и нажата кнопка Add Task, то новое задание добавляется в массив заданий с указанными property (moment() - текущая дата)
+     * Также в массив с логом событий тоже добавляется новый элемент
      */
     public addNewTask = (event?: any): void => {
+        console.log('Event: ', event, '\nEvent.key: ', event.key);
         if ((event && event.key === 'Enter' || event === undefined) && this.newTaskName) {
             this.todoList.push({
                 position: this.todoList.length + 1,
@@ -42,7 +50,6 @@ class TodoController {
                 name: this.newTaskName,
                 date: moment(),
                 action: 'Add',
-                importance: 'add'
             });
             this.newTaskName = null;
         }
@@ -50,6 +57,7 @@ class TodoController {
 
     /**
      * @description изменяет статус задания на done/undone в списке  по кнопке или чекбоксу
+     * также добавляет соответствующий элемент в массив logTask
      * @param task - задание, элемент массива todoList, для которого изменяется статус done/undone
      */
     public changeTaskStatus = (task: ITodoItem): void => {
@@ -64,25 +72,25 @@ class TodoController {
             name: task.name,
             date: moment(),
             action: `Status changed on ${changedStatus}`,
-            importance: 'changestatus'
         });
     }
-
     /**
-     * @description удаляет задание из списка
-     * @param index - индекс задания, на котором была нажата кнопка Delete
+     * @description функция для подтверждения удаления
+     * Вызывается при нажатии на кнопку Delete в списке заданий. Открывает модальное окно, в котором можно либо подтвердить, либо отменить удаление
      */
     public agreeDeleteTask = (): void => {
         this.logTask.push({
             name: this.todoList[this.taskIndex].name,
             date: moment(),
             action: 'Delete',
-            importance: 'delete'
         });
         this.todoList.splice(this.taskIndex, 1);
         this.modalIsOpened = false;
     }
-
+    /**
+     * @description удаляет задание из списка и добавляет соответствующий элемент в logTask
+     * @param index - индекс задания, на котором была нажата кнопка Delete
+     */
     public deleteTask = (index: number): void => {
         this.modalIsOpened = true;
         this.taskIndex = index;
@@ -91,7 +99,7 @@ class TodoController {
     /**
      * @description функция сортировки значений таблицы по убыванию/возрастанию
      * @param field поле, по которому происходит сортировка. В разметке при вызове функции sortTask передается название столбца, на котором нужна фильтрация
-     * @param clear - необязательный параметр, определяющий, нажата ли кнопка Cancel Filters (если данная кнопка нажала, то функция вызывается с двумя параметрами: position, true)
+     * @param clear - необязательный параметр, определяющий, нажата ли кнопка Cancel Filters (если данная кнопка нажата, то функция вызывается с двумя параметрами: position, true)
      */
     public sortTask = (field: string, clear?: boolean): void => {
         if (clear || !angular.equals(this.orderByField, field)) {
@@ -104,7 +112,6 @@ class TodoController {
             name: '--',
             date: moment(),
             action: clear ? 'Cancel sort and filter' : `Sort by ${field}. Reverse: ${this.reverseSort}`,
-            importance: 'filters'
         });
     }
 

@@ -1,3 +1,3 @@
-import { ICartProduct } from './../../../models/cartproduct.interface';
+import { ICartProduct } from '../../../models/cartproduct';
 
 export const cartProducts: Array<ICartProduct> = [];

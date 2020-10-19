@@ -1,7 +1,7 @@
 import * as angular from 'angular';
-import { ICartProduct } from './../../../models/cartproduct.interface';
+import { ICartProduct } from '../../../models/cartproduct';
 import * as _ from 'underscore';
-import { IProduct } from './../../../models/product.interface';
+import { IProduct } from '../../../models/product';
 import { RandomizerService } from './../../../services/randomizer.service';
 import { products } from './products';
 import { cartProducts } from './../../cart/components/cartproucts';
@@ -11,7 +11,6 @@ import { IShopFilter } from '../../../models/shop-filter';
 
 export class ShopController {
 
-    private allProducts: Array<IProduct> = products;
     private filteredProducts: Array<IProduct> = [];
     private cartProducts: Array<ICartProduct> = cartProducts;
     private timeout: ng.IPromise<void>;
@@ -23,37 +22,54 @@ export class ShopController {
         private CalcTotalService: CalcTotalService,
         private $timeout: ng.ITimeoutService
     ) {
-        this.filteredProducts = this.allProducts;
+        this.filteredProducts = products;
         this.shopFilter = {
             name: '',
             minPrice: null,
             maxPrice: null,
             isDiscount: false
         };
-
+        /**
+         * @description watch-ер для того, чтобы при изменении ключа, говорящего о запуске функции goDiscount изRandomizerService
+         * используется для того, чтобы применялся фильтр, описанный в applyFilter
+         */
         this.$scope.$watch(() => this.RandomService.getIsGoDiscountStart(), (newValue: boolean, oldValue: boolean) => {
             this.applyFilter();
         });
     }
-
+    /**
+     *
+     * @param index - индекс элемента из ng-repeat. По сути номер объекта в массиве products
+     * @description функция добавления в корзину товара по индексу. Сначала _.find находит соответствие товару с номером index в массиве товаров корзины cartProducts
+     * Далее, если товар был найден, то к цене элемента массива cartProducts с соответствующим именем прибавляется цена добавленного товара (суммируются цены)
+     * Далее количество товаров увеличивается на единицу
+     * Иначе, если товар не был найден в корзине (cartProducts), тогда выполняется добавление товара в данный массив с указанными property
+     * products[index].added = true нужен для отображения/не отображения стикера на углу карточки товара с информацией о том, что товар добавлен в корзину
+     */
     public addToCart = (index: number) => {
         this.beautify(index);
-        let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === this.allProducts[index].name);
+        let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === products[index].name);
         if (productInCart !== undefined) {
             let productInCartIndex = this.cartProducts.indexOf(productInCart);
-            this.cartProducts[productInCartIndex].price += this.allProducts[index].discountPrice;
+            this.cartProducts[productInCartIndex].price += products[index].discountPrice;
             this.cartProducts[productInCartIndex].count++;
         } else {
             this.cartProducts.push({
-                name: this.allProducts[index].name,
-                price: this.allProducts[index].discountPrice,
+                name: products[index].name,
+                price: products[index].discountPrice,
                 count: 1
             });
         }
-        this.allProducts[index].added = true;
+        products[index].added = true;
         this.CalcTotalService.calcTotals();
     }
-
+    /**
+     *
+     * @param index - индекс элемента из ng-repeat. По сути номер объекта в массиве products
+     * @description функиця используется для красивого отбражения количества товаров в корзине на стикере на карточке товара страницы shop
+     * сначала останавливается timeout, чтобы не было наложений
+     * затем элементу с ID, соответствующему маске добавляется класс time, после чего данный клас удаляется через секунду, что обеспечивает анимацию
+     */
     private beautify = (index: number): void => {
         this.$timeout.cancel(this.timeout);
         angular.element(document.getElementById(`counter-${index}`)).addClass('time');
@@ -61,16 +77,30 @@ export class ShopController {
             angular.element(document.getElementById(`counter-${index}`)).removeClass('time');
         }, 1000);
     }
-
+    /**
+     *
+     * @param price - строковое значение цены
+     * @description функиця преобразует цену, введенную в input для фильра по цене согласно регексу
+     * (все значения, кроме цифр от 0 до 9 заменяются на пустую строку, что обеспечивает возможность ввода ТОЛЬКО цифр)
+     */
     private transformPrice = (price: string): string => {
         return price ? price.replace(/[^0-9]/g, '') : '';
     }
-
+    /**
+     * @description minPrice и maxPrice привязаны через ng-model к input в разметке.
+     * Сначала для каждой из цен, которые являются строками, вызывается функция transformPrice при каждом изменении в input, так как на input стоит ng-change,
+     * который и вызывает applyFilter
+     * Затем значению max присваивается элемент с максимальной ценой из всего массива products(<IProducts> нужен для жесткого указания типа возвращаемого функцией _.max значения,
+     * так как по дефотлу вернется number | IProduct, что не даст возможность получить доступ к property объекта max)
+     * Далее переписывается массив filteredProducts (изначально он равен products)
+     * метод _.filter вернет массив объектов, которые соответствуют указанному условию (+ используется для приведения minPrice и maxPrice к типу number)
+     * соответственно, если в поля ввода minPrice и maxPrice ничего не введено, то им присваиваются 0 и max.discountPrice, что по сути выводит весь изначальный массив
+     */
     private applyFilter = () => {
         this.shopFilter.minPrice = this.transformPrice(this.shopFilter.minPrice);
         this.shopFilter.maxPrice = this.transformPrice(this.shopFilter.maxPrice);
-        let max = <IProduct>_.max(this.allProducts, (product: IProduct) => product.discountPrice);
-        this.filteredProducts = _.filter(this.allProducts, (product: IProduct) => {
+        let max = <IProduct>_.max(products, (product: IProduct) => product.discountPrice);
+        this.filteredProducts = _.filter(products, (product: IProduct) => {
             return  product.discountPrice >= (+this.shopFilter.minPrice || 0) &&
                     product.discountPrice <= (+this.shopFilter.maxPrice || max.discountPrice);
         });

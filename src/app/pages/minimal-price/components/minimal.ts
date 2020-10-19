@@ -1,3 +1,3 @@
-import { IMinimal } from './../../../models/minimal.interface';
+import { IMinimal } from '../../../models/minimal';
 
 export const minimal: Array<IMinimal> = [];
