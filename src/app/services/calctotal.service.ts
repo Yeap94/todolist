@@ -27,6 +27,9 @@ export class CalcTotalService {
      */
     public clearCart = () => {
         this.cartProducts.splice(0, this.cartProducts.length);
+        _.forEach(products, (product: IProduct) => {
+            product.added = false;
+        });
         this.calcTotals();
     }
     /**
@@ -68,6 +71,7 @@ export class CalcTotalService {
      * @description используется для отображения количества товаров одного типа, добавленных в корзину, на флажке на карточке товара страницы Shop
      */
     public getProductCount = (productName: string): number => {
+        console.log('CalcTotalService -> productName', productName);
         let addedProduct: ICartProduct = _.find(this.cartProducts, (each: ICartProduct) => productName === each.name);
         if (addedProduct !== undefined) {
             return addedProduct.count;

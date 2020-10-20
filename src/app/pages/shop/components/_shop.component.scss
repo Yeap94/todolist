@@ -1,6 +1,6 @@
 .shop-main {
     background-image: url(./images/shopbckg.jpg);
-    height: auto;
+    height: 100%;
     width: 100%;
     padding-top: 40px;
     background-size: cover;
@@ -9,16 +9,37 @@
         display: inline-flex;
         padding-top: 40px;
         padding-left: 70px;
+        .input-text {
+            padding: 7px;
+            font-size: 14px;
+            border: 5px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25) inset, 0 2px 10px rgba(0, 0, 0, 0.25);
+            border-radius: 11px;
+            background: linear-gradient(to bottom,#c6ffdd83, #9fd3da83);
+            appearance: none;
+            outline: none;
+            color: #555;
+            width: 255px;
+            margin-right: 25px;
+        }
+        .is-discount {
+            display: inline-flex;
+            padding-top: 7px;
+            font-size: 25px;
+        }
         .search-for-price {
             display: inline-flex;
         }
     }
     .product-container {
-        margin: 27px;
         margin-top: 40px;
         display: inline-flex;
         flex-wrap: wrap;
         justify-content: space-around;
+        max-height: 82vh;
+        overflow-y: auto;
+        width: 100%;
+        padding: 10px;
         .product-item {
             display: flex;
             flex-direction: column;
@@ -27,6 +48,7 @@
             padding-inline: 20px;
             background: rgba(255, 228, 196, 0.082);
             border-radius: 50px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
             
             &:hover {
                 background-color: rgba(141, 149, 156, 0.5);;

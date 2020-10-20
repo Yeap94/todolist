@@ -39,42 +39,44 @@ export class ShopController {
     }
     /**
      *
-     * @param index - индекс элемента из ng-repeat. По сути номер объекта в массиве products
-     * @description функция добавления в корзину товара по индексу. Сначала _.find находит соответствие товару с номером index в массиве товаров корзины cartProducts
+     * @param product - элемент из ng-repeat. По сути номер объекта в массиве products
+     * @description функция добавления в корзину товара по индексу. Сначала _.find находит соответствие товару product в массиве товаров корзины cartProducts
      * Далее, если товар был найден, то к цене элемента массива cartProducts с соответствующим именем прибавляется цена добавленного товара (суммируются цены)
      * Далее количество товаров увеличивается на единицу
      * Иначе, если товар не был найден в корзине (cartProducts), тогда выполняется добавление товара в данный массив с указанными property
-     * products[index].added = true нужен для отображения/не отображения стикера на углу карточки товара с информацией о том, что товар добавлен в корзину
+     * product.added = true нужен для отображения/не отображения стикера на углу карточки товара с информацией о том, что товар добавлен в корзину
      */
-    public addToCart = (index: number) => {
-        this.beautify(index);
-        let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === products[index].name);
+    public addToCart = (product: IProduct) => {
+        this.beautify(product);
+        let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === product.name);
         if (productInCart !== undefined) {
             let productInCartIndex = this.cartProducts.indexOf(productInCart);
-            this.cartProducts[productInCartIndex].price += products[index].discountPrice;
+            this.cartProducts[productInCartIndex].price += product.discountPrice;
             this.cartProducts[productInCartIndex].count++;
         } else {
             this.cartProducts.push({
-                name: products[index].name,
-                price: products[index].discountPrice,
+                name: product.name,
+                price: product.discountPrice,
                 count: 1
             });
         }
-        products[index].added = true;
+        product.added = true;
         this.CalcTotalService.calcTotals();
     }
     /**
      *
-     * @param index - индекс элемента из ng-repeat. По сути номер объекта в массиве products
+     * @param product - продукт из массива filteredProducts products
      * @description функиця используется для красивого отбражения количества товаров в корзине на стикере на карточке товара страницы shop
      * сначала останавливается timeout, чтобы не было наложений
      * затем элементу с ID, соответствующему маске добавляется класс time, после чего данный клас удаляется через секунду, что обеспечивает анимацию
      */
-    private beautify = (index: number): void => {
+    private beautify = (product: IProduct): void => {
         this.$timeout.cancel(this.timeout);
-        angular.element(document.getElementById(`counter-${index}`)).addClass('time');
+        product.clickAdd = true;
         this.timeout = this.$timeout(() => {
-            angular.element(document.getElementById(`counter-${index}`)).removeClass('time');
+            _.forEach(this.filteredProducts, (product: IProduct) => {
+                product.clickAdd = false;
+            });
         }, 1000);
     }
     /**
