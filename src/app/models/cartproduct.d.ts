@@ -1,5 +1,5 @@
+import { IDifferentPrices } from './prices';
 export interface ICartProduct {
     name: string;
-    price: number;
-    count: number;
+    differentPrices: Array<IDifferentPrices>;
 }

@@ -1,4 +1,3 @@
-<!-- <div>on cart page</div> -->
 <div class="main-cart">
     <span class="empty" ng-if="!vm.CalcTotalService.cartProducts.length">
         <div>Cart is empty...</div>
@@ -10,17 +9,21 @@
             <img class="{{cartProduct.name}}" ng-src="images/{{cartProduct.name}}.png" alt="{{product.name}}">
             <div class="product-discription">
                 <span>{{cartProduct.name}}</span>
-                <span>Price: {{cartProduct.price | currency: $ }} </span>
-                <span>Count: {{cartProduct.count}}</span>
-                <button class="btn btn-delete-cart" ng-click="vm.CalcTotalService.deleteFromCart($index)">Delete</button>
+                <span>Oбщая цена: {{vm.CalcTotalService.getProductTotalPrice(cartProduct) | currency: $}}</span>
+                <div ng-repeat="differentPrice in cartProduct.differentPrices">
+                    <span>Price: {{differentPrice.price | currency: $}}</span>
+                    <span>Count: {{differentPrice.count}}</span>
+                    <button class="btn btn-delete-cart" ng-click="vm.dleteOneProduct(differentPrice, cartProduct)">Delete one</button>
+                </div>
+                <button class="btn btn-delete-cart" ng-click="vm.CalcTotalService.deleteFromCart($index)">Delete All</button>
             </div>
         </div>
     </div>
     <div class="footer" ng-if="vm.CalcTotalService.cartProducts.length">
         <button class="btn clear-cart-button" ng-click="vm.CalcTotalService.clearCart()">Clear cart</button>
         <div class="totals">
-            <span>Total count of products: {{vm.CalcTotalService.getTotalCount()}}</span>
-            <span>Total price: {{vm.CalcTotalService.getTotalPrice() | currency: $}}</span>
+            <span>Total count of products: {{vm.CalcTotalService.totalCount}}</span>
+            <span>Total price: {{vm.CalcTotalService.totalPrice | currency: $}}</span>
         </div>
     </div>
 </div>

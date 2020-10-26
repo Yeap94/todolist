@@ -7,7 +7,7 @@ import { products } from './products';
 import { cartProducts } from './../../cart/components/cartproucts';
 import { CalcTotalService } from './../../../services/calctotal.service';
 import { IShopFilter } from '../../../models/shop-filter';
-
+import { IDifferentPrices } from '../../../models/prices';
 
 export class ShopController {
 
@@ -50,17 +50,26 @@ export class ShopController {
         this.beautify(product);
         let productInCart: ICartProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => cartProduct.name === product.name);
         if (productInCart !== undefined) {
-            let productInCartIndex = this.cartProducts.indexOf(productInCart);
-            this.cartProducts[productInCartIndex].price += product.discountPrice;
-            this.cartProducts[productInCartIndex].count++;
-        } else {
+            let equalPrice: IDifferentPrices = _.find(productInCart.differentPrices, (differentPrice: IDifferentPrices) => differentPrice.price === product.discountPrice);
+            if (equalPrice !== undefined) {
+                equalPrice.count++;
+            } else {
+                productInCart.differentPrices.push({
+                    price: product.discountPrice,
+                    count: 1
+                });
+            }
+        }  else {
             this.cartProducts.push({
                 name: product.name,
-                price: product.discountPrice,
-                count: 1
+                differentPrices: [{
+                    price: product.discountPrice,
+                    count: 1
+                }]
             });
         }
         product.added = true;
+        console.log('ShopController -> publicaddToCart -> this.cartProducts', this.cartProducts);
         this.CalcTotalService.calcTotals();
     }
     /**

@@ -3,6 +3,8 @@ import { cartProducts } from './../pages/cart/components/cartproucts';
 import { ICartProduct } from '../models/cartproduct';
 import { IProduct } from '../models/product';
 import { products } from './../pages/shop/components/products';
+import { IDifferentPrices } from '../models/prices';
+
 /**
  * @description Сервис для подсчета общего количества и цены продуктов в корзине
  */
@@ -12,6 +14,7 @@ export class CalcTotalService {
     private cartProducts: Array<ICartProduct> = cartProducts;
     private totalPrice: number = 0;
     private totalCount: number = 0;
+
     /**
      *
      * @param index - индекс элемента в массиве cartProducts
@@ -39,44 +42,25 @@ export class CalcTotalService {
         this.totalCount = this.calcTotalCount();
         this.totalPrice = this.calcTotalPrice();
     }
-    /**
-     * @description при момщи метода reduce полчаем общее количество продуктов в корзине (отсчет ведется с 0)
-     * используется для отображения количества товаров одного типа, так как изменяется само property product.count для каждого продукта
-     */
-    public calcTotalCount = (): number => {
-        return _.reduce(this.cartProducts, (count: number, product: ICartProduct) => count + product.count, 0);
+
+    public getProductTotalPrice = (item: ICartProduct): number => {
+        return _.reduce(item.differentPrices, (acc: number, each: IDifferentPrices) => acc + each.price * each.count, 0);
     }
-    /**
-     * @description при момщи метода reduce полчаем общую стоимость продуктов в корзине (отсчет ведется с 0)
-     * используется для отображения цены товаров одного типа, так как изменяется само property product.price для каждого продукта
-     */
+
     public calcTotalPrice = (): number => {
-        return _.reduce(this.cartProducts, (price: number, product: ICartProduct) => price + product.price, 0);
+        let accumulator = 0;
+        _.forEach(this.cartProducts, (each: ICartProduct) => {
+            accumulator += this.getProductTotalPrice(each);
+        });
+        return accumulator;
     }
-    /**
-     * @description get-тер для общего числа продуктов
-     */
-    public getTotalCount = (): number => {
-        return this.totalCount;
+
+    public calcTotalCount = (): number => {
+        let accumulator = 0;
+        _.forEach(this.cartProducts, (each: ICartProduct) => {
+            accumulator += _.reduce(each.differentPrices, (acc: number, each: IDifferentPrices) => acc + each.count, 0);
+        });
+        return accumulator;
     }
-    /**
-     * @description get-тер для общей цены продуктов
-     */
-    public getTotalPrice = (): number => {
-        return this.totalPrice;
-    }
-    /**
-     *
-     * @param productName имя продукта, которое приходит из разметки на странице Shop
-     * @description используется для отображения количества товаров одного типа, добавленных в корзину, на флажке на карточке товара страницы Shop
-     */
-    public getProductCount = (productName: string): number => {
-        console.log('CalcTotalService -> productName', productName);
-        let addedProduct: ICartProduct = _.find(this.cartProducts, (each: ICartProduct) => productName === each.name);
-        if (addedProduct !== undefined) {
-            return addedProduct.count;
-        } else {
-            return;
-        }
-    }
+
 }
