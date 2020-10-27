@@ -13,7 +13,9 @@
                 <div ng-repeat="differentPrice in cartProduct.differentPrices">
                     <span>Price: {{differentPrice.price | currency: $}}</span>
                     <span>Count: {{differentPrice.count}}</span>
-                    <button class="btn btn-delete-cart" ng-click="vm.dleteOneProduct(differentPrice, cartProduct)">Delete one</button>
+                    <img class="add-remove-icons" ng-src="images/remove.png" alt="Remove" ng-click="vm.dleteOneProduct(differentPrice, cartProduct)" ng-if="differentPrice.count>1">
+                    <img class="add-remove-icons" ng-src="images/add.png" alt="add" ng-click="vm.addOne(differentPrice)" ng-if="!cartProduct.isDiscount && differentPrice.count>1">
+                    <img class="add-remove-icons" ng-src="images/delete-this-price.png" alt="delete" ng-click="vm.dleteOneProduct(differentPrice, cartProduct)" ng-if="differentPrice.count===1">
                 </div>
                 <button class="btn btn-delete-cart" ng-click="vm.CalcTotalService.deleteFromCart($index)">Delete All</button>
             </div>

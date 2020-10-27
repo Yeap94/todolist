@@ -34,6 +34,11 @@
                     align-items: flex-start;
                     padding-top: 15px;
                     padding-left: 50px;
+                    .add-remove-icons {
+                        height: 40px;
+                        width:40px;
+                        cursor: pointer;
+                    }
                 }
             }
         }

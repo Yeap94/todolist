@@ -62,6 +62,7 @@ export class ShopController {
         }  else {
             this.cartProducts.push({
                 name: product.name,
+                isDiscount: product.priceChanged,
                 differentPrices: [{
                     price: product.discountPrice,
                     count: 1

@@ -25,6 +25,11 @@ class CartController {
         }
         this.CalcTotalService.calcTotals();
     }
+
+    public addOne = (differentPrice: IDifferentPrices): void => {
+        differentPrice.count++;
+        this.CalcTotalService.calcTotals();
+    }
 }
 
 export class Cart implements angular.IComponentOptions {
