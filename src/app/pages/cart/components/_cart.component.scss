@@ -36,6 +36,9 @@
                     padding-left: 50px;
                     .different-price{
                         display: inline-flex;
+                        .discount {
+                            color: rgb(133, 233, 133)
+                        }
                         span {
                             display: inline-flex;
                         }
