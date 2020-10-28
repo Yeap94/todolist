@@ -71,7 +71,6 @@ export class ShopController {
             });
         }
         product.added = true;
-        console.log('ShopController -> publicaddToCart -> this.cartProducts', this.cartProducts);
         this.CalcTotalService.calcTotals();
     }
     /**
