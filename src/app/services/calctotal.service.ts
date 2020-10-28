@@ -55,10 +55,15 @@ export class CalcTotalService {
         return accumulator;
     }
 
+    public getProductTotalCount = (item: string): number => {
+        let addedProduct = _.find(this.cartProducts, (cartProduct: ICartProduct) => item === cartProduct.name);
+        return _.reduce(addedProduct.differentPrices, (acc: number, each: IDifferentPrices) => acc + each.count, 0);
+    }
+
     public calcTotalCount = (): number => {
         let accumulator = 0;
         _.forEach(this.cartProducts, (each: ICartProduct) => {
-            accumulator += _.reduce(each.differentPrices, (acc: number, each: IDifferentPrices) => acc + each.count, 0);
+            accumulator += this.getProductTotalCount(each.name);
         });
         return accumulator;
     }

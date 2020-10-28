@@ -1,10 +1,10 @@
 <div class="shop-main">
     <div class="filter-container">
-        <div class="search-for-name">
+        <div>
             <input class="input-text" ng-model="vm.shopFilter.name" placeholder="Name of product..." maxlength="50">
         </div>
         <div class="search-for-price">
-           <div class="price-diapazone">
+           <div>
                From
                <input class="input-text" ng-model="vm.shopFilter.minPrice" ng-change="vm.applyFilter()" placeholder="Min price">
                to
@@ -24,7 +24,7 @@
                     In cart
                 </div>
                 <div class="count" ng-class="{'time': product.clickAdd}">
-                    {{vm.CalcTotalService.getProductCount(product.name)}}
+                    {{vm.CalcTotalService.getProductTotalCount(product.name)}}
                 </div>
             </div>
             <h2>

@@ -34,10 +34,20 @@
                     align-items: flex-start;
                     padding-top: 15px;
                     padding-left: 50px;
-                    .add-remove-icons {
-                        height: 40px;
-                        width:40px;
-                        cursor: pointer;
+                    .different-price{
+                        display: inline-flex;
+                        span {
+                            display: inline-flex;
+                        }
+                        .different-price-count{
+                            width: 3vw;
+                            padding-left: 10px;
+                        }
+                        .add-remove-icons {
+                            height: 40px;
+                            width:40px;
+                            cursor: pointer;
+                        }
                     }
                 }
             }

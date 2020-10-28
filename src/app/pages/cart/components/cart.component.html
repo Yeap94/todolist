@@ -10,12 +10,13 @@
             <div class="product-discription">
                 <span>{{cartProduct.name}}</span>
                 <span>Oбщая цена: {{vm.CalcTotalService.getProductTotalPrice(cartProduct) | currency: $}}</span>
-                <div ng-repeat="differentPrice in cartProduct.differentPrices">
+                <div class="different-price" ng-repeat="differentPrice in cartProduct.differentPrices">
                     <span>Price: {{differentPrice.price | currency: $}}</span>
-                    <span>Count: {{differentPrice.count}}</span>
+                    <span>Count: <span class="different-price-count">{{differentPrice.count}}</span></span>
                     <img class="add-remove-icons" ng-src="images/remove.png" alt="Remove" ng-click="vm.dleteOneProduct(differentPrice, cartProduct)" ng-if="differentPrice.count>1">
-                    <img class="add-remove-icons" ng-src="images/add.png" alt="add" ng-click="vm.addOne(differentPrice)" ng-if="!cartProduct.isDiscount && differentPrice.count>1">
                     <img class="add-remove-icons" ng-src="images/delete-this-price.png" alt="delete" ng-click="vm.dleteOneProduct(differentPrice, cartProduct)" ng-if="differentPrice.count===1">
+                    <img class="add-remove-icons" ng-src="images/add.png" alt="add" ng-click="vm.addOne(differentPrice)" ng-if="!differentPrice.isDiscount">
+                    
                 </div>
                 <button class="btn btn-delete-cart" ng-click="vm.CalcTotalService.deleteFromCart($index)">Delete All</button>
             </div>

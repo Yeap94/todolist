@@ -56,16 +56,17 @@ export class ShopController {
             } else {
                 productInCart.differentPrices.push({
                     price: product.discountPrice,
-                    count: 1
+                    count: 1,
+                    isDiscount: product.priceChanged,
                 });
             }
         }  else {
             this.cartProducts.push({
                 name: product.name,
-                isDiscount: product.priceChanged,
                 differentPrices: [{
                     price: product.discountPrice,
-                    count: 1
+                    count: 1,
+                    isDiscount: product.priceChanged
                 }]
             });
         }
