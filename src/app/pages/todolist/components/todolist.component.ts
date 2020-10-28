@@ -38,7 +38,6 @@ class TodoController {
      * Также в массив с логом событий тоже добавляется новый элемент
      */
     public addNewTask = (event?: any): void => {
-        console.log('Event: ', event, '\nEvent.key: ', event.key);
         if ((event && event.key === 'Enter' || event === undefined) && this.newTaskName) {
             this.todoList.push({
                 position: this.todoList.length + 1,
