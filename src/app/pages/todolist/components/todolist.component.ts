@@ -3,7 +3,7 @@ import * as _ from 'underscore';
 import * as moment from 'moment';
 import { ITodoItem } from '../../../models/todoitem';
 import { ILogOfTask } from '../../../models/log';
-
+import { products } from '../../shop/components/products';
 class TodoController {
 
     private reverseSort: boolean = false;
@@ -15,6 +15,9 @@ class TodoController {
     private taskIndex: number;
     private todoList: Array<ITodoItem> = [];
     private logTask: Array<ILogOfTask> = []; // массив, в который записываются все действия и изменения в todoList
+    constructor (
+        private $http: ng.IHttpService
+    ) {}
     /**
      * @description на ините в массив добавляется дефолтный элемент
      */
@@ -37,13 +40,13 @@ class TodoController {
      * и нажата кнопка Add Task, то новое задание добавляется в массив заданий с указанными property (moment() - текущая дата)
      * Также в массив с логом событий тоже добавляется новый элемент
      */
-    public addNewTask = (event?: any): void => {
+    public addNewTask = (event?: KeyboardEvent, status?: boolean): void => {
         if ((event && event.key === 'Enter' || event === undefined) && this.newTaskName) {
             this.todoList.push({
                 position: this.todoList.length + 1,
                 name: this.newTaskName,
                 date: moment(),
-                status: false
+                status: status || false
             });
             this.logTask.push({
                 name: this.newTaskName,
@@ -120,8 +123,25 @@ class TodoController {
     public clearLog = (): void => {
         this.logTask.splice(0, this.logTask.length);
     }
+
+    public getTodos = (): void => {
+        this.$http.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+            .then((response: angular.IHttpResponse<IFakeApiTodo>) => {
+                _.forEach(response.data, (todoItem: IFakeApiTodo) => {
+                    this.newTaskName = todoItem.title;
+                    this.addNewTask(undefined, todoItem.completed);
+                });
+            })
+            .catch((error: any) => console.log('Error'));
+    }
 }
 
+interface IFakeApiTodo {
+    userId:	number;
+    id:	number;
+    title: string;
+    completed: boolean;
+}
 export class Todolist implements angular.IComponentOptions {
     public static selector = 'todolist';
     public static controller = TodoController;
